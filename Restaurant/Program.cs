@@ -1,7 +1,16 @@
+using Microsoft.EntityFrameworkCore;
+using Restaurnat.DAL.Database;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Enhancement ConnectionString
+var connectionString = builder.Configuration.GetConnectionString("defaultConnection");
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+options.UseSqlServer(connectionString));
 
 var app = builder.Build();
 
