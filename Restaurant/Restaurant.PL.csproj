@@ -20,4 +20,9 @@
     <ProjectReference Include="..\Restaurnat.DAL\Restaurnat.DAL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\assets\img\.DS_Store" />
+    <None Include="wwwroot\assets\vendor\.DS_Store" />
+  </ItemGroup>
+
 </Project>
