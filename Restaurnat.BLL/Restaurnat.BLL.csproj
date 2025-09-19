@@ -19,4 +19,10 @@
     <ProjectReference Include="..\Restaurnat.DAL\Restaurnat.DAL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Helper\" />
+    <Folder Include="ModelVM\" />
+    <Folder Include="Mapper\" />
+  </ItemGroup>
+
 </Project>

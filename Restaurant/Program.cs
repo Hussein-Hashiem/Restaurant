@@ -1,5 +1,9 @@
 using Microsoft.EntityFrameworkCore;
+using Restaurnat.BLL.Services.Apstraction;
+using Restaurnat.BLL.Services.Implementation;
 using Restaurnat.DAL.Database;
+using Restaurnat.DAL.Repo.Apstraction;
+using Restaurnat.DAL.Repo.Implementation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +15,35 @@ var connectionString = builder.Configuration.GetConnectionString("defaultConnect
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlServer(connectionString));
+
+// Repositries Registration
+builder.Services.AddScoped<IUserRepo, UserRepo>();
+builder.Services.AddScoped<ITableRepo, TableRepo>();
+builder.Services.AddScoped<IRestaurantRepo, RestaurantRepo>();
+builder.Services.AddScoped<IReservedTableRepo, ReservedTableRepo>();
+builder.Services.AddScoped<IReservedItemRepo, ReservedItemRepo>();
+builder.Services.AddScoped<IReservationRepo, ReservationRepo>();
+builder.Services.AddScoped<IPaymentRepo, PaymentRepo>();
+builder.Services.AddScoped<IMenuRepo, MenuRepo>();
+builder.Services.AddScoped<IItemRepo, ItemRepo>();
+builder.Services.AddScoped<IFeedbackRepo, FeedbackRepo>();
+builder.Services.AddScoped<IEventRepo, EventRepo>();
+builder.Services.AddScoped<IChefRepo, ChefRepo>();
+
+// Services Registration
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ITableService, TableService>();
+builder.Services.AddScoped<IRestaurantService, RestaurantService>();
+builder.Services.AddScoped<IReservedTableService, ReservedTableService>();
+builder.Services.AddScoped<IReservedItemService, ReservedItemService>();
+builder.Services.AddScoped<IReservationService, ReservationService>();
+builder.Services.AddScoped<IPaymentService, PaymentService>();
+builder.Services.AddScoped<IMenuService, MenuService>();
+builder.Services.AddScoped<IItemService, ItemService>();
+builder.Services.AddScoped<IFeedbackService, FeedbackService>();
+builder.Services.AddScoped<IEventService, EventService>();
+builder.Services.AddScoped<IChefService, ChefService>();
+
 
 var app = builder.Build();
 
