@@ -18,7 +18,7 @@ namespace Restaurnat.DAL.Entities
         public int? feedback_id { get; private set; }
         public Feedback Feedback { get; private set; }
         [ForeignKey("User")]
-        public int user_id { get; private set; }
+        public string user_id { get; private set; }
         public User User { get; private set; }
         public List<ReservedTable> ReservedTables { get; private set; }
         public List<ReservedItem> ReservedItems { get; private set; }

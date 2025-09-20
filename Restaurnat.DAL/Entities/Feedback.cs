@@ -9,7 +9,7 @@ namespace Restaurnat.DAL.Entities
         [Key]
         public int feedback_id { get; private set; }
         [ForeignKey("User")]
-        public int UserId { get; private set; }
+        public string UserId { get; private set; }
         public User User { get; private set; }
         public int rating { get; private set; }
         public string? comment { get; private set; }
