@@ -1,5 +1,4 @@
-﻿
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Restaurnat.DAL.Entities
 {
@@ -22,5 +21,26 @@ namespace Restaurnat.DAL.Entities
         public DateTime? DeletedOn { get; private set; }
         public string? DeletedBy { get; private set; }
         public bool IsDeleted { get; private set; } = false;
+
+
+        public void Update(
+            string name,
+            string address,
+            int numOfGuests,
+            string? about,
+            bool recommended,
+            int? numOfVipCustomers,
+            string modifiedBy)
+        {
+            this.name = name;
+            this.address = address;
+            this.num_of_guests = numOfGuests;
+            this.about = about;
+            this.recommended = recommended;
+            this.num_of_vip_customers = numOfVipCustomers;
+            this.ModifiedBy = modifiedBy;
+            this.ModifiedOn = DateTime.Now;
+
+        }
     }
 }
