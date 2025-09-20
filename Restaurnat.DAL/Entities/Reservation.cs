@@ -7,28 +7,28 @@ namespace Restaurnat.DAL.Entities
     public class Reservation
     {
         [Key]
-        public int reservation_id { get; set; }
-        public DateTime reservation_date { get; set; }
-        public int duration { get; set; }
-        public int number_of_people { get; set; }
-        public bool done { get; set; }
-        public int fees { get; set; }
-        public int total_money { get; set; }
+        public int reservation_id { get; private set; }
+        public DateTime reservation_date { get; private set; }
+        public int duration { get; private set; }
+        public int number_of_people { get; private set; }
+        public bool done { get; private set; }
+        public int fees { get; private set; }
+        public int total_money { get; private set; }
         [ForeignKey("Feedback")]
-        public int? feedback_id { get; set; }
-        public Feedback Feedback { get; set; }
+        public int? feedback_id { get; private set; }
+        public Feedback Feedback { get; private set; }
         [ForeignKey("User")]
-        public int user_id { get; set; }
-        public User User { get; set; }
-        public List<ReservedTable> ReservedTables { get; set; }
-        public List<ReservedItem> ReservedItems { get; set; }
-        public Payment Payment { get; set; }
-        public DateTime CreatedOn { get; set; }
-        public string CreatedBy { get; set; }
-        public DateTime? ModifiedOn { get; set; }
-        public string? ModifiedBy { get; set; }
-        public DateTime? DeletedOn { get; set; }
-        public string? DeletedBy { get; set; }
-        public bool IsDeleted { get; set; } = false;
+        public int user_id { get; private set; }
+        public User User { get; private set; }
+        public List<ReservedTable> ReservedTables { get; private set; }
+        public List<ReservedItem> ReservedItems { get; private set; }
+        public Payment Payment { get; private set; }
+        public DateTime CreatedOn { get; private set; }
+        public string CreatedBy { get; private set; }
+        public DateTime? ModifiedOn { get; private set; }
+        public string? ModifiedBy { get; private set; }
+        public DateTime? DeletedOn { get; private set; }
+        public string? DeletedBy { get; private set; }
+        public bool IsDeleted { get; private set; } = false;
     }
 }
