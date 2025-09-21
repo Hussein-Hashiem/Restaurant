@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Restaurnat.BLL.Mapper;
 using Restaurnat.BLL.Services.Apstraction;
 using Restaurnat.BLL.Services.Implementation;
 using Restaurnat.DAL.Database;
@@ -18,6 +19,9 @@ var connectionString = builder.Configuration.GetConnectionString("defaultConnect
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlServer(connectionString));
+
+// Auto Mapper
+builder.Services.AddAutoMapper(x => x.AddProfile(new DomainProfile()));
 
 // Repositries Registration
 builder.Services.AddScoped<IUserRepo, UserRepo>();

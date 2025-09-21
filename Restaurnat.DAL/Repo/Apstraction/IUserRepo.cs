@@ -1,5 +1,4 @@
-﻿
-using Restaurnat.DAL.Entities;
+﻿using Restaurnat.DAL.Entities;
 
 namespace Restaurnat.DAL.Repo.Apstraction
 {
