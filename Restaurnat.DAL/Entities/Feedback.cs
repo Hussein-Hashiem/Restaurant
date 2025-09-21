@@ -20,12 +20,11 @@ namespace Restaurnat.DAL.Entities
         public DateTime? DeletedOn { get; private set; }
         public string? DeletedBy { get; private set; }
         public bool IsDeleted { get; private set; } = false;
-        public bool Update(int rating, string comment, string ModifiedBy)
+        public bool Update(int rating, string comment)
         {
-            if (rating == 0 || string.IsNullOrEmpty(ModifiedBy)) return false;
+            if (rating == 0) return false;
             this.rating = rating;
             this.comment = comment;
-            this.ModifiedBy = ModifiedBy;
             this.ModifiedOn = DateTime.Now;
             return true;
         }

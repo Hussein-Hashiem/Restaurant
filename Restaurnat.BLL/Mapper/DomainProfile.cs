@@ -15,6 +15,10 @@ namespace Restaurnat.BLL.Mapper
            .ForMember(dest => dest.UserName,
                opt => opt.MapFrom(src => src.User.first_name + " " + src.User.last_name))
            .ReverseMap();
+            CreateMap<Feedback, GetFeedbackVM>().ForMember(dest => dest.UserName,
+               opt => opt.MapFrom(src => src.User.first_name + " " + src.User.last_name))
+           .ReverseMap();
+            CreateMap<Feedback, CreateFeedbackVM>().ReverseMap();
         }
     }
 }
