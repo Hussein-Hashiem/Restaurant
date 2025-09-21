@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Restaurnat.DAL.Database;
 
@@ -11,9 +12,11 @@ using Restaurnat.DAL.Database;
 namespace Restaurnat.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250921210451_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -188,18 +191,10 @@ namespace Restaurnat.DAL.Migrations
                     b.Property<string>("about")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("age")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("category")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("categoryId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("experience_years")
+                    b.Property<int?>("experience_years")
                         .HasColumnType("int");
 
                     b.Property<string>("imagepath")
@@ -213,15 +208,12 @@ namespace Restaurnat.DAL.Migrations
                     b.Property<int>("restaurant_id")
                         .HasColumnType("int");
 
-                    b.Property<int?>("restaurant_id1")
-                        .HasColumnType("int");
-
                     b.Property<bool>("work_now")
                         .HasColumnType("bit");
 
                     b.HasKey("chef_id");
 
-                    b.HasIndex("restaurant_id1");
+                    b.HasIndex("restaurant_id");
 
                     b.ToTable("Chefs");
                 });
@@ -274,6 +266,8 @@ namespace Restaurnat.DAL.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("event_id");
+
+                    b.HasIndex("restaurant_id");
 
                     b.ToTable("Events");
                 });
@@ -888,9 +882,24 @@ namespace Restaurnat.DAL.Migrations
 
             modelBuilder.Entity("Restaurnat.DAL.Entities.Chef", b =>
                 {
-                    b.HasOne("Restaurnat.DAL.Entities.Restaurant", null)
+                    b.HasOne("Restaurnat.DAL.Entities.Restaurant", "Restaurant")
                         .WithMany("Chefs")
-                        .HasForeignKey("restaurant_id1");
+                        .HasForeignKey("restaurant_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Restaurant");
+                });
+
+            modelBuilder.Entity("Restaurnat.DAL.Entities.Event", b =>
+                {
+                    b.HasOne("Restaurnat.DAL.Entities.Restaurant", "Restaurant")
+                        .WithMany()
+                        .HasForeignKey("restaurant_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Restaurant");
                 });
 
             modelBuilder.Entity("Restaurnat.DAL.Entities.Feedback", b =>

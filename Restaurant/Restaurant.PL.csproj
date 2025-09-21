@@ -19,7 +19,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Restaurnat.BLL\Restaurnat.BLL.csproj" />
-    <ProjectReference Include="..\Restaurnat.DAL\Restaurnat.DAL.csproj" />
   </ItemGroup>
 
   <ItemGroup>
