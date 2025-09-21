@@ -39,9 +39,11 @@ namespace Restaurnat.DAL.Repo.Implementation
 
                 if (result.chef_id > 0)
                 {
-                    result.EditChef(chef);
-                    DB.SaveChanges();
-                    return (true, null);
+                    if (result.EditChef(chef))
+                    {
+                        DB.SaveChanges();
+                        return (true, null);
+                    }
                 }
                 return (false, "Something went wrong");
             }
@@ -59,9 +61,12 @@ namespace Restaurnat.DAL.Repo.Implementation
 
                 if (result.chef_id > 0)
                 {
-                    result.RestoreChef();
-                    DB.SaveChanges();
-                    return (true, null);
+                    if (result.RestoreChef())
+                    {
+                        DB.SaveChanges();
+                        return (true, null);
+                    }
+                    
                 }
                 return (false, "Something went wrong");
             }
@@ -78,9 +83,12 @@ namespace Restaurnat.DAL.Repo.Implementation
             var result = DB.Chefs.Where(ch => ch.chef_id == id).FirstOrDefault();
             if (result.chef_id != 0)
             {
-                result.DeleteChef(deletedBy); //soft delete
-                DB.SaveChanges();
-                return (true, null);
+                if (result.DeleteChef(deletedBy))
+                { //soft delete
+                    DB.SaveChanges();
+                    return (true, null);
+                }
+                
             }
             return (false, "Something went wrong");
         }

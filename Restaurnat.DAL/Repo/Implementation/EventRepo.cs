@@ -38,9 +38,11 @@ namespace Restaurnat.DAL.Repo.Implementation
 
                 if (result.event_id > 0)
                 {
-                    result.EditEvent(ev);
-                    DB.SaveChanges();
-                    return (true, null);
+                    if (result.EditEvent(ev))
+                    {
+                        DB.SaveChanges();
+                        return (true, null);
+                    }   
                 }
                 return (false, "Something went wrong");
             }
@@ -58,9 +60,11 @@ namespace Restaurnat.DAL.Repo.Implementation
 
                 if (result.event_id > 0)
                 {
-                    result.RestoreEvent();
-                    DB.SaveChanges();
-                    return (true, null);
+                    if (result.RestoreEvent())
+                    {
+                        DB.SaveChanges();
+                        return (true, null);
+                    }
                 }
                 return (false, "Something went wrong");
             }
@@ -77,9 +81,12 @@ namespace Restaurnat.DAL.Repo.Implementation
             var result = DB.Events.Where(evv => evv.event_id == id).FirstOrDefault();
             if (result.event_id != 0)
             {
-                result.DeleteEvent();
-                DB.SaveChanges();
-                return (true, null);
+                if (result.DeleteEvent())
+                {
+                    DB.SaveChanges();
+                    return (true, null);
+                }
+                
             }
             return (false, "Something went wrong");
         }
