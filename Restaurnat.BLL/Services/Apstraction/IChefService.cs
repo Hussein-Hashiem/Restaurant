@@ -11,7 +11,7 @@ namespace Restaurnat.BLL.Services.Apstraction
         public (bool, string?) Update(EditChefVM chef, IFormFile image);
         (bool, string?) Delete(int id);
         (bool, string?) Restore(int id);
-        (List<GetChefVM>, string?) GetAllUsers();
+        (List<GetChefVM>, string?) GetAll();
         (GetChefVM, string?) GetById(int id);
     }
 }

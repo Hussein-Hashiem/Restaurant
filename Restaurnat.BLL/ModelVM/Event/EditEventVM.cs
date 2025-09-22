@@ -9,6 +9,7 @@ namespace Restaurnat.BLL.ModelVM.Event
 {
     public class EditEventVM
     {
+        public int event_id { get;  set; }
         [Required(ErrorMessage = "Event Name is required")]
         [MinLength(3)]
         public string name { get; set; }

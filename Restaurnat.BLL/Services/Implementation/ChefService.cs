@@ -59,7 +59,7 @@ namespace Restaurnat.BLL.Services.Implementation
             return (false, result.Item2);
         }
 
-        public (List<GetChefVM>, string?) GetAllUsers()
+        public (List<GetChefVM>, string?) GetAll()
         {
             var result = chefRepo.GetAll();
             var chefList_mapped = chef_mapper.Map<List<GetChefVM>>(result);
