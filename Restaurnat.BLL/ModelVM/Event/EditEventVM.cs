@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -8,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Restaurnat.BLL.ModelVM.Event
 {
-    public class CreateEventVM
+    public class EditEventVM
     {
         [Required(ErrorMessage = "Event Name is required")]
         [MinLength(3)]
