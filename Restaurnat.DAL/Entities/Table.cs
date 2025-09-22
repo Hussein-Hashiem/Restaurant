@@ -14,8 +14,8 @@ namespace Restaurnat.DAL.Entities
         public string CreatedBy { get; private set; }
         public DateTime? ModifiedOn { get; private set; }
         public string? ModifiedBy { get; private set; }
-        public DateTime? DeletedOn { get; private set; }
+        public DateTime? DeletedOn { get; set; }
         public string? DeletedBy { get; private set; }
-        public bool IsDeleted { get; private set; } = false;
+        public bool IsDeleted { get; set; } = false;
     }
 }
