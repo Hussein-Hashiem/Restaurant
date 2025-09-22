@@ -6,7 +6,7 @@ namespace Restaurnat.DAL.Entities
 {
     public class Chef
     {
-        public Chef(string name, string age, string? about, string category, int experience_years, bool work_now, string imagepath, int restaurant_id, string createdBy)
+        public Chef(string name, string age, string about, string category, int experience_years, bool work_now, string imagepath, int restaurant_id, string createdBy)
         {
             this.chef_id = chef_id;
             this.name = name;
@@ -25,11 +25,12 @@ namespace Restaurnat.DAL.Entities
         public int chef_id { get; private set; }
         public string name { get; private set; }
         public string age { get; private set; }
-        public string? about { get; private set; }
-        public int? categoryId { get; private set; }
+        public string about { get; private set; }
+        public int categoryId { get; private set; }
         public string category { get; private set; }
         public int experience_years { get; private set; }
         public bool work_now { get; private set; }
+        //public int work_status { get; private set; } // hired - fired - retired
         public string imagepath { get; private set; }
         [ForeignKey("Restaurant")]
         public int restaurant_id { get; private set; }
