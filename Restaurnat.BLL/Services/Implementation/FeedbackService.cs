@@ -17,12 +17,12 @@ namespace Restaurnat.BLL.Services.Implementation
             this.mapper = mapper;
         }
 
-        public (bool, string, List<GetAllFeedbackVM>) GetAll()
+        public (bool, string, List<GetFeedbackVM>) GetAll()
         {
             try
             {
                 var allfeedback = feedbackRepo.GetAll();
-                var result = mapper.Map<List<GetAllFeedbackVM>>(allfeedback);
+                var result = mapper.Map<List<GetFeedbackVM>>(allfeedback);
                 return (true, "Success", result);
             }
             catch (Exception ex) { return (false, ex.Message, null); }
