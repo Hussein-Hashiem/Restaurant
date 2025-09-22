@@ -12,6 +12,7 @@ namespace Restaurnat.BLL.ModelVM.Chef
         public int chef_id { get;  set; }
 
         [Required(ErrorMessage = "Name is required")]
+        [MinLength(3)]
         public string name { get; set; }
 
         [Required(ErrorMessage = "Age is required, range between 20-80")]
@@ -19,6 +20,7 @@ namespace Restaurnat.BLL.ModelVM.Chef
         public string age { get; set; }
 
         [Required(ErrorMessage = "Write a short paragraph about the chef")]
+        [MinLength(10)]
         public string about { get; set; }
 
         [Required(ErrorMessage = "Category is required")]

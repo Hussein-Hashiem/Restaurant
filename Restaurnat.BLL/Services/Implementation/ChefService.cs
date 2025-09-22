@@ -27,6 +27,7 @@ namespace Restaurnat.BLL.Services.Implementation
             if(image == null) return (false, "image not uploaded!");
             if (chef.categoryId == -1)
             {
+                chef.categoryId = 0;
                 chef.category = "General Chef";
             }
             else
@@ -86,6 +87,7 @@ namespace Restaurnat.BLL.Services.Implementation
             if (chef == null) { return (false, "You passed null argument"); }
             if (chef.categoryId == -1)
             {
+                chef.categoryId = 0;
                 chef.category = "General Chef";
             }
             else
