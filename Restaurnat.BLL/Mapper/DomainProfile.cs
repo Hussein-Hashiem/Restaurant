@@ -12,9 +12,8 @@ namespace Restaurnat.BLL.Mapper
     {
         public DomainProfile()
         {
-            CreateMap<User, GetAllUserVM>().ReverseMap();
-            CreateMap<Feedback, GetAllFeedbackVM>()
-           .ForMember(dest => dest.UserName,
+            CreateMap<User, GetUserVM>().ReverseMap();
+            CreateMap<Feedback, GetFeedbackVM>().ForMember(dest => dest.UserName,
                opt => opt.MapFrom(src => src.User.first_name + " " + src.User.last_name))
            .ReverseMap();
 

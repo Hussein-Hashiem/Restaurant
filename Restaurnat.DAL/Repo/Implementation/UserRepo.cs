@@ -69,7 +69,7 @@ namespace Restaurnat.DAL.Repo.Implementation
             {
                 var result = DB.Users.Where(f => f.Id == user.Id).FirstOrDefault();
                 if (result == null) return false;
-                result.Update(user.first_name, user.last_name, user.age, user.country, user.city, user.street, user.imagepath, user.ModifiedBy);
+                result.Update(user.first_name, user.last_name, user.age, user.country, user.city, user.street, user.imagepath);
                 DB.SaveChanges();
                 return true;
             }

@@ -63,7 +63,7 @@ namespace Restaurnat.DAL.Repo.Implementation
             try { 
                 var result = DB.Feedbacks.Where(f => f.feedback_id == newfeedback.feedback_id).FirstOrDefault();
                 if (result == null) return false;
-                result.Update(newfeedback.rating, newfeedback.comment, newfeedback.ModifiedBy);
+                result.Update(newfeedback.rating, newfeedback.comment);
                 DB.SaveChanges();
                 return true;
             }

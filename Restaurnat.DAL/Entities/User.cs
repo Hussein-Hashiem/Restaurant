@@ -6,6 +6,19 @@ namespace Restaurnat.DAL.Entities
 {
     public class User : IdentityUser
     {
+        public User(string first_name, string last_name, int age, string country, string city, string street, string imagepath)
+        {
+            if (string.IsNullOrEmpty(first_name) || string.IsNullOrEmpty(last_name) || age == 0 || string.IsNullOrEmpty(country) || string.IsNullOrEmpty(city) || string.IsNullOrEmpty(street))
+                throw new ArgumentException("Invalid arguments to create a User");
+            this.first_name = first_name;
+            this.last_name = last_name;
+            this.age = age;
+            this.country = country;
+            this.city = city;
+            this.street = street;
+            this.imagepath = imagepath;
+            this.CreatedOn = DateTime.Now;
+        }
         public string first_name { get; private set; }
         public string last_name { get; private set; }
         public int age { get; private set; }
@@ -22,7 +35,7 @@ namespace Restaurnat.DAL.Entities
         public DateTime? DeletedOn { get; private set; }
         public string? DeletedBy { get; private set; }
         public bool IsDeleted { get; private set; } = false;
-        public bool Update(string first_name, string last_name, int age, string country, string city, string street, string imagepath, string ModifiedBy)
+        public bool Update(string first_name, string last_name, int age, string country, string city, string street, string imagepath)
         {
             if (string.IsNullOrEmpty(first_name) || string.IsNullOrEmpty(last_name) || age == 0 || string.IsNullOrEmpty(country) || string.IsNullOrEmpty(city) || string.IsNullOrEmpty(street)) return false;
             this.first_name = first_name;
@@ -33,7 +46,6 @@ namespace Restaurnat.DAL.Entities
             this.street = street;
             this.imagepath = imagepath;
             this.ModifiedOn = DateTime.Now;
-            this.ModifiedBy = ModifiedBy;
             return true;
         }
     }

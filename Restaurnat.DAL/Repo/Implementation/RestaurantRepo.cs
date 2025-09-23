@@ -10,7 +10,7 @@ namespace Restaurnat.DAL.Repo.Implementation
 
         public RestaurantRepo(ApplicationDbContext DB)
         {
-            this.DB = DB;
+            this.DB = DB; 
         }
 
         public (bool, string) Create(Restaurant newRestaurant)
