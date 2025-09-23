@@ -1,6 +1,7 @@
 ﻿
 using AutoMapper;
 using Restaurnat.BLL.ModelVM.Feedback;
+using Restaurnat.BLL.ModelVM.Payment;
 using Restaurnat.BLL.ModelVM.Restaurant;
 using Restaurnat.BLL.ModelVM.User;
 using Restaurnat.DAL.Entities;
@@ -20,6 +21,12 @@ namespace Restaurnat.BLL.Mapper
             CreateMap<Restaurant, GetRestaurantVM>().ReverseMap();
             CreateMap<Restaurant, GetAllRestaurantVM>().ReverseMap();
             CreateMap<Restaurant, UpdateRestaurantVM>().ReverseMap();
+
+
+            CreateMap<Payment, CreatePaymentVM>().ReverseMap();
+            CreateMap<Payment, GetAllPaymentVM>().ReverseMap();
+            CreateMap<Payment, GetPaymentVM>().ReverseMap();
+            CreateMap<Payment, UpdatePaymentVM>().ReverseMap();
 
         }
     }
