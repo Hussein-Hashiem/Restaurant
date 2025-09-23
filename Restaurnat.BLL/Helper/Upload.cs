@@ -1,4 +1,4 @@
-﻿
+
 using Microsoft.AspNetCore.Http;
 
 namespace Restaurnat.BLL.Helper

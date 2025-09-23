@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Restaurnat.DAL.Database;
 
@@ -11,9 +12,11 @@ using Restaurnat.DAL.Database;
 namespace Restaurnat.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250921231532_eventsEnt")]
+    partial class eventsEnt
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -186,7 +189,6 @@ namespace Restaurnat.DAL.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("about")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("age")
@@ -197,7 +199,7 @@ namespace Restaurnat.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("categoryId")
+                    b.Property<int?>("categoryId")
                         .HasColumnType("int");
 
                     b.Property<int>("experience_years")
