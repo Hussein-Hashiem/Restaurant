@@ -6,21 +6,7 @@ namespace Restaurnat.DAL.Entities
 {
     public class Chef
     {
-        public Chef(string name, string age, string about, string category, int experience_years, bool work_now, string imagepath, int restaurant_id, string createdBy)
-        {
-            this.chef_id = chef_id;
-            this.name = name;
-            this.age = age;
-            this.about = about;
-            this.category = category;
-            this.experience_years = experience_years;
-            this.work_now = work_now;
-            this.imagepath = imagepath;
-            this.restaurant_id = restaurant_id;
-            CreatedOn = DateTime.Now;
-            CreatedBy = createdBy;
-        }
-
+        
         [Key]
         public int chef_id { get; private set; }
         public string name { get; private set; }

@@ -32,11 +32,13 @@ namespace Restaurnat.BLL.Services.Implementation
             }
             else
             {
-                var categ = "getCategoryById";/////////////////////////////////// HEREEEEE
+                var categ = "GetMenuById(chef.categoryId)";
                 chef.category=categ; 
             }
             chef.work_now = true;
             chef.imagepath = Upload.UploadFile("Files", image);
+            chef.CreatedOn = DateTime.Now;
+            chef.CreatedBy = "Admin";
 
             var chef_mapped = chef_mapper.Map<Chef>(chef);
             var result = chefRepo.Create(chef_mapped);
@@ -92,7 +94,7 @@ namespace Restaurnat.BLL.Services.Implementation
             }
             else
             {
-                var categ = " "; //DB.Chefs.Where(ch => ch.chef_id == id).FirstOrDefault(); -> but in categories
+                var categ = "GetMenuById(chef.categoryId)";
                 chef.category = categ;
             }
             chef.imagepath = Upload.UploadFile("Files", image);

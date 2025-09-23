@@ -25,5 +25,7 @@ namespace Restaurnat.BLL.ModelVM.Event
         [Required(ErrorMessage = "Should belong to the restaurant")]
         [Range(0, 100)]
         public int restaurant_id { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public string CreatedBy { get; set; }
     }
 }

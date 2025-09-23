@@ -7,17 +7,6 @@ namespace Restaurnat.DAL.Entities
 {
     public class Event
     {
-        public Event(string name, string description, DateTime date, int duration, int restaurant_id, string createdBy)
-        {
-            this.name = name;
-            this.description = description;
-            this.date = date;
-            this.duration = duration;
-            this.restaurant_id = restaurant_id;
-            CreatedOn = DateTime.Now;
-            CreatedBy = createdBy;
-        }
-
         [Key]
         public int event_id { get; private set; }
         public string name { get; private set; }

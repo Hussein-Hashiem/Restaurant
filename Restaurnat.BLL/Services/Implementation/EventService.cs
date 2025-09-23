@@ -24,6 +24,8 @@ namespace Restaurnat.BLL.Services.Implementation
         public (bool, string?) Create(CreateEventVM eventy)
         {
             if (eventy == null) return (false, "No event is entered");
+            eventy.CreatedBy = "Admin";
+            eventy.CreatedOn = DateTime.Now;
             var event_mapped = event_mapper.Map<Event>(eventy);
             var result = eventRepo.Create(event_mapped);
             if (result.Item1) return (true, null);

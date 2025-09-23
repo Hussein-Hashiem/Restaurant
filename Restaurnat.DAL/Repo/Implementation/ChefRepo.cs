@@ -66,7 +66,6 @@ namespace Restaurnat.DAL.Repo.Implementation
                         DB.SaveChanges();
                         return (true, null);
                     }
-                    
                 }
                 return (false, "Something went wrong");
             }
