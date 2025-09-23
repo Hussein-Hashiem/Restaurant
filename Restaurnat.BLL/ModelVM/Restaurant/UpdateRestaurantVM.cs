@@ -3,6 +3,7 @@ namespace Restaurnat.BLL.ModelVM.Restaurant
 {
     public class UpdateRestaurantVM
     {
+        public int restaurant_id { get; set; }
         public string name { get; set; }
         public string address { get; set; }
         public int num_of_guests { get; set; }

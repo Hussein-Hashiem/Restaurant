@@ -1,44 +1,60 @@
-﻿using Restaurnat.BLL.Services.Apstraction;
+﻿using AutoMapper;
+using Restaurnat.BLL.ModelVM.Payment;
+using Restaurnat.BLL.ModelVM.Restaurant;
+using Restaurnat.BLL.Services.Apstraction;
 using Restaurnat.DAL.Entities;
 using Restaurnat.DAL.Repo.Apstraction;
+using Restaurnat.DAL.Repo.Implementation;
 
 namespace Restaurnat.BLL.Services.Implementation
 {
     public class PaymentService : IPaymentService
     {
         private readonly IPaymentRepo paymentRepo;
-
-        public PaymentService(IPaymentRepo paymentRepo)
+        private readonly IMapper mapper;
+        public PaymentService(IPaymentRepo paymentRepo, IMapper mapper)
         {
             this.paymentRepo = paymentRepo;
+            this.mapper = mapper;
         }
+        
 
-        public (bool, string) Create(Payment newPayment)
+        public (bool, string) Create(CreatePaymentVM newPayment)
         {
             if (newPayment.amount <= 0)
                 return (false, "Amount must be greater than 0");
-
-            return paymentRepo.Create(newPayment);
+            var result = mapper.Map<Payment>(newPayment);
+            var re= paymentRepo.Create(result);
+            return re;
         }
 
         public bool Delete(int id)
         {
-            return paymentRepo.Delete(id);
+            var result = paymentRepo.Delete(id);
+            return result;
         }
 
-        public List<Payment> GetAll()
+        public List<GetAllPaymentVM> GetAll()
         {
-            return paymentRepo.GetAll();
+            var result = paymentRepo.GetAll();
+            var mapp = mapper.Map<List<GetAllPaymentVM>>(result);
+            if (result.Count > 0) return (mapp);
+            return null;
         }
 
-        public Payment GetById(int id)
+        public GetPaymentVM GetById(int id)
         {
-            return paymentRepo.GetById(id);
+            var result = paymentRepo.GetById(id);
+            var mapp = mapper.Map<GetPaymentVM>(result);
+            return mapp;
         }
 
-        public bool Update(Payment newPayment)
+        public bool Update(UpdatePaymentVM newPayment)
         {
-            return paymentRepo.Update(newPayment);
+            var mapp = mapper.Map<Payment>(newPayment);
+            var result = paymentRepo.Update(mapp);
+            return result;
         }
+
     }
 }
