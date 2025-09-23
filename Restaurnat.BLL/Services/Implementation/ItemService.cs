@@ -1,4 +1,7 @@
 ﻿
+using AutoMapper;
+using Restaurnat.BLL.Helper;
+using Restaurnat.BLL.ModelVM.Item;
 using Restaurnat.BLL.Services.Apstraction;
 using Restaurnat.DAL.Entities;
 using Restaurnat.DAL.Repo.Apstraction;
@@ -8,44 +11,64 @@ namespace Restaurnat.BLL.Services.Implementation
     public class ItemService : IItemService
     {
         private readonly IItemRepo itemRepo;
-        public ItemService(IItemRepo itemRepo)
+        private readonly IMapper mapper;
+        public ItemService(IItemRepo itemRepo, IMapper mapper)
         {
             this.itemRepo = itemRepo;
+            this.mapper = mapper;
         }
 
-        public (bool, string) Create(Item newItem)
+        public (bool, string) Create(CreateItemVM newItem)
         {
-            if (string.IsNullOrWhiteSpace(newItem.name) || string.IsNullOrWhiteSpace(newItem.description) || newItem.price <= 0)
-            {
-                return (false, "Item is required");
+            try {
+                var imagepath = Upload.UploadFile("Files", newItem.image);
+                var item = new Item(newItem.name, newItem.price, newItem.description, imagepath, newItem.menu_id, newItem.recommended);
+                var result = itemRepo.Create(item);
+                if (result.Item1) return (true, "Item created successfully");
+                else return (false, "Item creation failed");
             }
-            var result = itemRepo.Create(newItem);
-            return result;
-
+            catch (Exception ex) { return (false, ex.Message); }
         }
 
         public bool Delete(int id)
         {
-            if (id == 0)
-            {
-                return false;
+            try {
+                return itemRepo.Delete(id);
             }
-            return itemRepo.Delete(id);
+            catch (Exception) { return false; }
         }
 
-        public List<Item> GetAll()
+        public List<GetItemVM> GetAll()
         {
-            return itemRepo.GetAll();
+            try { 
+                var items = itemRepo.GetAll();
+                var result = mapper.Map<List<GetItemVM>>(items);
+                return result;
+            }
+            catch (Exception) { throw; }
         }
 
-        public Item GetById(int id)
+        public GetItemVM GetById(int id)
         {
-            return (itemRepo.GetById(id));
+            try {
+                var item = itemRepo.GetById(id);
+                var result = mapper.Map<GetItemVM>(item);
+                return result;
+            }
+            catch (Exception) { throw; }
         }
 
-        public bool Update(Item newItem)
+        public bool Update(int id, EditItemVM newItem)
         {
-            return itemRepo != null && itemRepo.Update(newItem);
+            try {
+                var item = itemRepo.GetById(id);
+                if (item == null) return false;
+                var imagepath = Upload.UploadFile("Files", newItem.image);
+                item.Update(newItem.name, newItem.price, newItem.description, imagepath, newItem.menu_id, newItem.recommended);
+                var result = itemRepo.Update(item);
+                return result;
+            }
+            catch (Exception) { return false; }
         }
     }
 }

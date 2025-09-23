@@ -37,7 +37,7 @@ namespace Restaurnat.DAL.Entities
 
         public Reservation()
         {
-            
+
         }
         public Reservation(
             DateTime reservationDate,
@@ -45,8 +45,7 @@ namespace Restaurnat.DAL.Entities
             int numberOfPeople,
             int fees,
             int totalMoney,
-            string userId,
-            string createdBy)
+            string userId)
         {
             this.reservation_date = reservationDate;
             this.duration = duration;
@@ -54,9 +53,6 @@ namespace Restaurnat.DAL.Entities
             this.fees = fees;
             this.total_money = totalMoney;
             this.user_id = userId;
-            this.CreatedBy = createdBy;
-            this.CreatedOn = DateTime.Now;
-            this.IsDeleted = false;
         }
 
         public void Update(
@@ -64,24 +60,17 @@ namespace Restaurnat.DAL.Entities
             int duration,
             int numberOfPeople,
             int fees,
-            int totalMoney,
-            string modifiedBy)
+            int totalMoney)
         {
             this.reservation_date = reservationDate;
             this.duration = duration;
             this.number_of_people = numberOfPeople;
             this.fees = fees;
             this.total_money = totalMoney;
-            this.ModifiedBy = modifiedBy;
             this.ModifiedOn = DateTime.Now;
         }
 
-        public void Delete(string deletedBy)
-        {
-            this.IsDeleted = true;
-            this.DeletedBy = deletedBy;
-            this.DeletedOn = DateTime.Now;
-        }
+
     }
 }
 

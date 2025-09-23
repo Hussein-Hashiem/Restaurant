@@ -24,5 +24,27 @@ namespace Restaurnat.DAL.Entities
         public DateTime? DeletedOn { get; private set; }
         public string? DeletedBy { get; private set; }
         public bool IsDeleted { get; private set; } = false;
+        public Item(string name, decimal price, string description, string imagepath, int menu_id, bool recommended)
+        {
+            this.name = name;
+            this.price = price;
+            this.description = description;
+            this.imagepath = imagepath;
+            this.menu_id = menu_id;
+            this.recommended = recommended;
+            CreatedOn = DateTime.Now;
+            CreatedBy = "System";
+        }
+        public void Update(string name, decimal price, string description, string imagepath, int menu_id, bool recommended)
+        {
+            this.name = name;
+            this.price = price;
+            this.description = description;
+            this.imagepath = imagepath;
+            this.menu_id = menu_id;
+            this.recommended = recommended;
+            ModifiedOn = DateTime.Now;
+            ModifiedBy = "System";
+        }
     }
 }

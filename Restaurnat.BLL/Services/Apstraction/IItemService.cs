@@ -1,14 +1,15 @@
 ﻿
-using Restaurnat.DAL.Entities;
+
+using Restaurnat.BLL.ModelVM.Item;
 
 namespace Restaurnat.BLL.Services.Apstraction
 {
     public interface IItemService
     {
-        List<Item> GetAll();
-        Item GetById(int id);
-        (bool, string) Create(Item newItem);
-        bool Update(Item newItem);
+        List<GetItemVM> GetAll();
+        GetItemVM GetById(int id);
+        (bool, string) Create(CreateItemVM newItem);
+        bool Update(int id, EditItemVM newItem);
         bool Delete(int id);
     }
 }

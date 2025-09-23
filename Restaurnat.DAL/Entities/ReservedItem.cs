@@ -18,5 +18,15 @@ namespace Restaurnat.DAL.Entities
         public DateTime? DeletedOn { get; private set; }
         public string? DeletedBy { get; private set; }
         public bool IsDeleted { get; private set; } = false;
+        public bool Update(int itemId, int reservationId)
+        {
+            if (itemId == 0 || reservationId == 0) return false;
+
+            this.ItemId = itemId;
+            this.ReservationId = reservationId;
+            this.ModifiedOn = DateTime.Now;
+
+            return true;
+        }
     }
 }

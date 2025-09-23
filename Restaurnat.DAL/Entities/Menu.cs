@@ -30,43 +30,23 @@ namespace Restaurnat.DAL.Entities
             string name,
             string description,
             int numOfItems,
-            int restaurantId,
-            string createdBy,
-            DateTime createdOn,
-            DateTime? modifiedOn,
-            string? modifiedBy,
-            DateTime? deletedOn,
-            string? deletedBy,
-            bool isDeleted
+            int restaurantId
         )
         {
             this.name = name;
             this.Description = description;
             this.num_of_items = numOfItems;
             this.restaurant_id = restaurantId;
-            this.CreatedBy = createdBy;
-            this.CreatedOn = createdOn;
-            this.ModifiedOn = modifiedOn;
-            this.ModifiedBy = modifiedBy;
-            this.DeletedOn = deletedOn;
-            this.DeletedBy = deletedBy;
-            this.IsDeleted = isDeleted;
-        }
-        public void Update(string name, string description, int numOfItems, int restaurantId, string modifiedBy)
+            this.CreatedOn = DateTime.Now;
+         }
+        public void Update(string name, string description, int numOfItems, int restaurantId)
         {
             this.name = name;
             this.Description = description;
             this.num_of_items = numOfItems;
             this.restaurant_id = restaurantId;
-            this.ModifiedBy = modifiedBy;
             this.ModifiedOn = DateTime.Now;
         }
-        public void Delete(string deletedBy)
-        {
-            this.IsDeleted = true;
-            this.DeletedBy = deletedBy;
-            this.DeletedOn = DateTime.Now;
-        }
-
+       
     }
 }

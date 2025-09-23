@@ -17,40 +17,20 @@ namespace Restaurnat.DAL.Repo.Implementation
         {
             try
             {
-                var NewMenu = new Menu(
-                    menu.name,
-                    menu.Description,
-                    menu.num_of_items,
-                    menu.restaurant_id,
-                    "sieef",
-                    DateTime.Now,
-                    null,
-                    null,
-                    null,
-                    null,
-                    false
-                    );
-                var result = DB.Add(NewMenu);
-                if (result != null)
-                    return (true, "Added");
-                return (false, "failed to add");
-
+                DB.Menus.Add(menu);
+                DB.SaveChanges();
+                return (true, " Added successfully");
             }
-            catch (Exception ex)
-            {
-                return (false, ex.Message);
-            }
+            catch (Exception e) { return (false, e.Message); }
         }
-        public IEnumerable<Menu> GetAll()
+        public List<Menu> GetAll()
         {
             try
             {
-                return DB.Menus.Where(m => !m.IsDeleted).ToList();
+                var result = DB.Menus.ToList();
+                return result;
             }
-            catch
-            {
-                return new List<Menu>();
-            }
+            catch (Exception) { throw; }
         }
         public Menu? GetById(int id)
         {
@@ -67,17 +47,13 @@ namespace Restaurnat.DAL.Repo.Implementation
         {
             try
             {
-                var oldMenu = DB.Menus.FirstOrDefault(m => m.menu_id == menu.menu_id && !m.IsDeleted);
-
+                var oldMenu = DB.Menus.FirstOrDefault(m => m.menu_id == menu.menu_id);
                 if (oldMenu == null)
                     return (false, " Menu not found");
-
-                oldMenu.Update(menu.name, menu.Description, menu.num_of_items, menu.restaurant_id, "sieef");
-
-                DB.Menus.Update(oldMenu);
+                oldMenu.Update(menu.name, menu.Description, menu.num_of_items, menu.restaurant_id);
                 DB.SaveChanges();
-
                 return (true, " Updated successfully");
+
             }
             catch (Exception ex)
             {
@@ -87,19 +63,13 @@ namespace Restaurnat.DAL.Repo.Implementation
 
         public (bool, string) Delete(int id)
         {
-            var DeletedMenu = DB.Menus.FirstOrDefault(m => m.menu_id == id && !m.IsDeleted);
             try
             {
-                var menu = DB.Menus.FirstOrDefault(m => m.menu_id == id && !m.IsDeleted);
-
-                if (menu == null)
+                var DeletedMenu = DB.Menus.FirstOrDefault(m => m.menu_id == id);
+                if (DeletedMenu == null)
                     return (false, " Menu not found");
-
-                menu.Delete("sieef");
-
-                DB.Menus.Update(menu);
+                DB.Menus.Remove(DeletedMenu);
                 DB.SaveChanges();
-
                 return (true, " Deleted successfully");
             }
             catch (Exception ex)

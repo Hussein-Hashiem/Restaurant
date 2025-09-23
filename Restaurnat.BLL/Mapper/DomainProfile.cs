@@ -3,7 +3,10 @@ using AutoMapper;
 using Restaurnat.BLL.ModelVM.Chef;
 using Restaurnat.BLL.ModelVM.Event;
 using Restaurnat.BLL.ModelVM.Feedback;
+using Restaurnat.BLL.ModelVM.Item;
+using Restaurnat.BLL.ModelVM.Menu;
 using Restaurnat.BLL.ModelVM.Payment;
+using Restaurnat.BLL.ModelVM.Reservation;
 using Restaurnat.BLL.ModelVM.Restaurant;
 using Restaurnat.BLL.ModelVM.User;
 using Restaurnat.DAL.Entities;
@@ -37,6 +40,16 @@ namespace Restaurnat.BLL.Mapper
             CreateMap<Event, CreateEventVM>().ReverseMap();
             CreateMap<Event, EditEventVM>().ReverseMap();
             CreateMap<Event, GetEventVM>().ReverseMap();
+
+            CreateMap<Item, GetItemVM>().ReverseMap();
+            CreateMap<Item, List<GetItemVM>>().ReverseMap();
+
+            CreateMap<Menu, GetMenuVM>().ReverseMap();
+            CreateMap<Menu, List<GetMenuVM>>().ReverseMap();
+            
+            CreateMap<Reservation, GetReservationVM>().ReverseMap();
+            CreateMap<Reservation, List<GetReservationVM>>().ReverseMap();
+
         }
     }
 }

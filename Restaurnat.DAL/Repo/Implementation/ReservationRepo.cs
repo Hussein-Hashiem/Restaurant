@@ -19,23 +19,9 @@ namespace Restaurnat.DAL.Repo.Implementation
         {
             try
             {
-                var newReservation = new Reservation(
-                    reservation.reservation_date,
-                    reservation.duration,
-                    reservation.number_of_people,
-                    reservation.fees,
-                    reservation.total_money,
-                    reservation.user_id,
-                    "sieef"
-                );
-
-                var result = DB.Reservations.Add(newReservation);
+                DB.Reservations.Add(reservation);
                 DB.SaveChanges();
-
-                if (result != null)
-                    return (true, "Reservation Added Successfully");
-
-                return (false, "Failed to add reservation");
+                return (true, "Reservation added successfully");
             }
             catch (Exception ex)
             {
@@ -43,74 +29,53 @@ namespace Restaurnat.DAL.Repo.Implementation
             }
         }
 
-        public IEnumerable<Reservation> GetAll()
+        public List<Reservation> GetAll()
         {
             try
             {
-                return DB.Reservations.Where(m => !m.IsDeleted).ToList();
+                var result = DB.Reservations.ToList();
+                return result;
             }
-            catch
-            {
-                return new List<Reservation>();
-
-            }
+            catch (Exception) { throw; }
         }
 
         public Reservation GetById(int id)
         {
             try
             {
-                return DB.Reservations.FirstOrDefault(m => m.reservation_id == id && !m.IsDeleted);
+                var result = DB.Reservations.FirstOrDefault(m => m.reservation_id == id);
+                return result;
             }
-            catch
-            {
-                return null;
-            }
+            catch (Exception) { throw; }
         }
 
         public (bool, string) Update(Reservation reservation)
         {
             try
             {
-                var oldReservation = DB.Reservations.FirstOrDefault(r => r.reservation_id == reservation.reservation_id && !r.IsDeleted);
-
-                if (oldReservation == null)
-                    return (false, "Reservation not found");
-
-                oldReservation.Update(
-                    reservation.reservation_date,
-                    reservation.duration,
-                    reservation.number_of_people,
-                    reservation.fees,
-                    reservation.total_money,
-                    "sieef"
-                );
-
-                DB.Reservations.Update(oldReservation);
+                var existingReservation = DB.Reservations.FirstOrDefault(m => m.reservation_id == reservation.reservation_id);
+                if (existingReservation == null) return (false, "Reservation not found");
+                existingReservation.Update(reservation.reservation_date, reservation.duration, reservation.number_of_people, reservation.fees, reservation.total_money);
                 DB.SaveChanges();
-
                 return (true, "Reservation updated successfully");
             }
-            catch (Exception ex)
-            {
-                return (false, ex.Message);
-            }
+            catch (Exception ex) { return (false, ex.Message); }
         }
         public (bool, string) Delete(int id)
         {
             try
-            {
-                var reservation = DB.Reservations.FirstOrDefault(r => r.reservation_id == id && !r.IsDeleted);
-
+            { 
+                var reservation = DB.Reservations.FirstOrDefault(m => m.reservation_id == id);
                 if (reservation == null)
+                {
                     return (false, "Reservation not found");
-
-                reservation.Delete("sieef");
-
-                DB.Reservations.Update(reservation);
-                DB.SaveChanges();
-
-                return (true, "Reservation deleted successfully");
+                }
+                else
+                {
+                    DB.Reservations.Remove(reservation);
+                    DB.SaveChanges();
+                    return (true, "Reservation deleted successfully");
+                }
             }
             catch (Exception ex)
             {
