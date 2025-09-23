@@ -386,11 +386,11 @@ namespace Restaurnat.DAL.Migrations
 
             modelBuilder.Entity("Restaurnat.DAL.Entities.Menu", b =>
                 {
-                    b.Property<int>("nenu_id")
+                    b.Property<int>("menu_id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("nenu_id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("menu_id"));
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
@@ -428,7 +428,7 @@ namespace Restaurnat.DAL.Migrations
                     b.Property<int>("restaurant_id")
                         .HasColumnType("int");
 
-                    b.HasKey("nenu_id");
+                    b.HasKey("menu_id");
 
                     b.HasIndex("restaurant_id");
 

@@ -12,8 +12,8 @@ using Restaurnat.DAL.Database;
 namespace Restaurnat.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250921215556_init")]
-    partial class init
+    [Migration("20250923164407_sss")]
+    partial class sss
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -189,12 +189,21 @@ namespace Restaurnat.DAL.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("about")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("age")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("category")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("experience_years")
+                    b.Property<int>("categoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("experience_years")
                         .HasColumnType("int");
 
                     b.Property<string>("imagepath")
@@ -208,12 +217,15 @@ namespace Restaurnat.DAL.Migrations
                     b.Property<int>("restaurant_id")
                         .HasColumnType("int");
 
+                    b.Property<int?>("restaurant_id1")
+                        .HasColumnType("int");
+
                     b.Property<bool>("work_now")
                         .HasColumnType("bit");
 
                     b.HasKey("chef_id");
 
-                    b.HasIndex("restaurant_id");
+                    b.HasIndex("restaurant_id1");
 
                     b.ToTable("Chefs");
                 });
@@ -266,8 +278,6 @@ namespace Restaurnat.DAL.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("event_id");
-
-                    b.HasIndex("restaurant_id");
 
                     b.ToTable("Events");
                 });
@@ -379,11 +389,11 @@ namespace Restaurnat.DAL.Migrations
 
             modelBuilder.Entity("Restaurnat.DAL.Entities.Menu", b =>
                 {
-                    b.Property<int>("nenu_id")
+                    b.Property<int>("menu_id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("nenu_id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("menu_id"));
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
@@ -421,7 +431,7 @@ namespace Restaurnat.DAL.Migrations
                     b.Property<int>("restaurant_id")
                         .HasColumnType("int");
 
-                    b.HasKey("nenu_id");
+                    b.HasKey("menu_id");
 
                     b.HasIndex("restaurant_id");
 
@@ -882,24 +892,9 @@ namespace Restaurnat.DAL.Migrations
 
             modelBuilder.Entity("Restaurnat.DAL.Entities.Chef", b =>
                 {
-                    b.HasOne("Restaurnat.DAL.Entities.Restaurant", "Restaurant")
+                    b.HasOne("Restaurnat.DAL.Entities.Restaurant", null)
                         .WithMany("Chefs")
-                        .HasForeignKey("restaurant_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Restaurant");
-                });
-
-            modelBuilder.Entity("Restaurnat.DAL.Entities.Event", b =>
-                {
-                    b.HasOne("Restaurnat.DAL.Entities.Restaurant", "Restaurant")
-                        .WithMany()
-                        .HasForeignKey("restaurant_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Restaurant");
+                        .HasForeignKey("restaurant_id1");
                 });
 
             modelBuilder.Entity("Restaurnat.DAL.Entities.Feedback", b =>

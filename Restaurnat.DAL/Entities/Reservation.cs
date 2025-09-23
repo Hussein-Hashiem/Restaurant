@@ -35,6 +35,10 @@ namespace Restaurnat.DAL.Entities
         public string? DeletedBy { get; private set; }
         public bool IsDeleted { get; private set; } = false;
 
+        public Reservation()
+        {
+            
+        }
         public Reservation(
             DateTime reservationDate,
             int duration,

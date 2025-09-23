@@ -22,7 +22,10 @@ namespace Restaurnat.DAL.Entities
         public DateTime? DeletedOn { get; private set; }
         public string? DeletedBy { get; private set; }
         public bool IsDeleted { get; private set; } = false;
-
+        public Menu()
+        {
+            
+        }
         public Menu(
             string name,
             string description,

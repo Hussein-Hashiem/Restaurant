@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Restaurnat.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class Initilization : Migration
+    public partial class sss : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -37,6 +37,13 @@ namespace Restaurnat.DAL.Migrations
                     city = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     street = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     imagepath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -55,6 +62,30 @@ namespace Restaurnat.DAL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Events",
+                columns: table => new
+                {
+                    event_id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    duration = table.Column<int>(type: "int", nullable: false),
+                    restaurant_id = table.Column<int>(type: "int", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Events", x => x.event_id);
                 });
 
             migrationBuilder.CreateTable(
@@ -244,9 +275,11 @@ namespace Restaurnat.DAL.Migrations
                     chef_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    about = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    category = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    experience_years = table.Column<int>(type: "int", nullable: true),
+                    age = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    about = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    categoryId = table.Column<int>(type: "int", nullable: false),
+                    category = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    experience_years = table.Column<int>(type: "int", nullable: false),
                     work_now = table.Column<bool>(type: "bit", nullable: false),
                     imagepath = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     restaurant_id = table.Column<int>(type: "int", nullable: false),
@@ -256,54 +289,24 @@ namespace Restaurnat.DAL.Migrations
                     ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    restaurant_id1 = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Chefs", x => x.chef_id);
                     table.ForeignKey(
-                        name: "FK_Chefs_Restaurants_restaurant_id",
-                        column: x => x.restaurant_id,
+                        name: "FK_Chefs_Restaurants_restaurant_id1",
+                        column: x => x.restaurant_id1,
                         principalTable: "Restaurants",
-                        principalColumn: "restaurant_id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Events",
-                columns: table => new
-                {
-                    event_id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    duration = table.Column<int>(type: "int", nullable: false),
-                    restaurant_id = table.Column<int>(type: "int", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Events", x => x.event_id);
-                    table.ForeignKey(
-                        name: "FK_Events_Restaurants_restaurant_id",
-                        column: x => x.restaurant_id,
-                        principalTable: "Restaurants",
-                        principalColumn: "restaurant_id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "restaurant_id");
                 });
 
             migrationBuilder.CreateTable(
                 name: "Menus",
                 columns: table => new
                 {
-                    nenu_id = table.Column<int>(type: "int", nullable: false)
+                    menu_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -319,7 +322,7 @@ namespace Restaurnat.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Menus", x => x.nenu_id);
+                    table.PrimaryKey("PK_Menus", x => x.menu_id);
                     table.ForeignKey(
                         name: "FK_Menus_Restaurants_restaurant_id",
                         column: x => x.restaurant_id,
@@ -393,7 +396,7 @@ namespace Restaurnat.DAL.Migrations
                         name: "FK_Items_Menus_menu_id",
                         column: x => x.menu_id,
                         principalTable: "Menus",
-                        principalColumn: "nenu_id",
+                        principalColumn: "menu_id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -407,7 +410,7 @@ namespace Restaurnat.DAL.Migrations
                     amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     payment_date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     status = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PaymentMethod = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PaymentMethod = table.Column<int>(type: "int", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -529,14 +532,9 @@ namespace Restaurnat.DAL.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Chefs_restaurant_id",
+                name: "IX_Chefs_restaurant_id1",
                 table: "Chefs",
-                column: "restaurant_id");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Events_restaurant_id",
-                table: "Events",
-                column: "restaurant_id");
+                column: "restaurant_id1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Feedbacks_UserId",
