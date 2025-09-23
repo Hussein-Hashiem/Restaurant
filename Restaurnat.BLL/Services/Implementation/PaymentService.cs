@@ -1,65 +1,60 @@
-﻿using Restaurnat.BLL.ModelVM.Payment;
+﻿using AutoMapper;
+using Restaurnat.BLL.ModelVM.Payment;
+using Restaurnat.BLL.ModelVM.Restaurant;
 using Restaurnat.BLL.Services.Apstraction;
 using Restaurnat.DAL.Entities;
 using Restaurnat.DAL.Repo.Apstraction;
+using Restaurnat.DAL.Repo.Implementation;
 
 namespace Restaurnat.BLL.Services.Implementation
 {
     public class PaymentService : IPaymentService
     {
         private readonly IPaymentRepo paymentRepo;
-
-        public PaymentService(IPaymentRepo paymentRepo)
+        private readonly IMapper mapper;
+        public PaymentService(IPaymentRepo paymentRepo, IMapper mapper)
         {
             this.paymentRepo = paymentRepo;
+            this.mapper = mapper;
         }
-
-        public (bool, string) Create(Payment newPayment)
-        {
-            if (newPayment.amount <= 0)
-                return (false, "Amount must be greater than 0");
-
-            return paymentRepo.Create(newPayment);
-        }
+        
 
         public (bool, string) Create(CreatePaymentVM newPayment)
         {
-            throw new NotImplementedException();
+            if (newPayment.amount <= 0)
+                return (false, "Amount must be greater than 0");
+            var result = mapper.Map<Payment>(newPayment);
+            var re= paymentRepo.Create(result);
+            return re;
         }
 
         public bool Delete(int id)
         {
-            return paymentRepo.Delete(id);
+            var result = paymentRepo.Delete(id);
+            return result;
         }
 
-        public List<Payment> GetAll()
+        public List<GetAllPaymentVM> GetAll()
         {
-            return paymentRepo.GetAll();
+            var result = paymentRepo.GetAll();
+            var mapp = mapper.Map<List<GetAllPaymentVM>>(result);
+            if (result.Count > 0) return (mapp);
+            return null;
         }
 
-        public Payment GetById(int id)
+        public GetPaymentVM GetById(int id)
         {
-            return paymentRepo.GetById(id);
-        }
-
-        public bool Update(Payment newPayment)
-        {
-            return paymentRepo.Update(newPayment);
+            var result = paymentRepo.GetById(id);
+            var mapp = mapper.Map<GetPaymentVM>(result);
+            return mapp;
         }
 
         public bool Update(UpdatePaymentVM newPayment)
         {
-            throw new NotImplementedException();
+            var mapp = mapper.Map<Payment>(newPayment);
+            var result = paymentRepo.Update(mapp);
+            return result;
         }
 
-        List<GetAllPaymentVM> IPaymentService.GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        GetPaymentVM IPaymentService.GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
