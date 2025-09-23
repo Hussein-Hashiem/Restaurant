@@ -1,5 +1,7 @@
 ﻿
 using AutoMapper;
+using Restaurnat.BLL.ModelVM.Chef;
+using Restaurnat.BLL.ModelVM.Event;
 using Restaurnat.BLL.ModelVM.Feedback;
 using Restaurnat.BLL.ModelVM.Payment;
 using Restaurnat.BLL.ModelVM.Restaurant;
@@ -28,6 +30,13 @@ namespace Restaurnat.BLL.Mapper
             CreateMap<Payment, GetPaymentVM>().ReverseMap();
             CreateMap<Payment, UpdatePaymentVM>().ReverseMap();
 
+            CreateMap<Chef, CreateChefVM>().ReverseMap();
+            CreateMap<Chef, EditChefVM>().ReverseMap();
+            CreateMap<Chef, GetChefVM>().ReverseMap();
+
+            CreateMap<Event, CreateEventVM>().ReverseMap();
+            CreateMap<Event, EditEventVM>().ReverseMap();
+            CreateMap<Event, GetEventVM>().ReverseMap();
         }
     }
 }
