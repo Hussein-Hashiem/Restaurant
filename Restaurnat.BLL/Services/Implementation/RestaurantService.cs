@@ -1,4 +1,5 @@
-﻿using Restaurnat.BLL.Services.Apstraction;
+﻿using Restaurnat.BLL.ModelVM.Restaurant;
+using Restaurnat.BLL.Services.Apstraction;
 using Restaurnat.DAL.Entities;
 using Restaurnat.DAL.Repo.Apstraction;
 
@@ -21,6 +22,11 @@ namespace Restaurnat.BLL.Services.Implementation
             return restaurantRepo.Create(newRestaurant);
         }
 
+        public (bool, string) Create(CreateRestaurantVM newRestaurant)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool Delete(int id)
         {
             return restaurantRepo.Delete(id);
@@ -39,6 +45,21 @@ namespace Restaurnat.BLL.Services.Implementation
         public bool Update(Restaurant newRestaurant)
         {
             return restaurantRepo.Update(newRestaurant);
+        }
+
+        public bool Update(UpdateRestaurantVM newRestaurant)
+        {
+            throw new NotImplementedException();
+        }
+
+        List<GetAllRestaurantVM> IRestaurantService.GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        GetRestaurantVM IRestaurantService.GetById(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
