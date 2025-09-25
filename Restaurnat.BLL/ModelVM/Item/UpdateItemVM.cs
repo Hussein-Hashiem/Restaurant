@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Restaurnat.BLL.ModelVM.Item
 {
-    public class EditItemVM
+    public class UpdateItemVM
     {
         public string name { get; set; }
         public decimal price { get; set; }
