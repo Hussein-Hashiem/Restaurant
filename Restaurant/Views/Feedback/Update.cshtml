@@ -1,0 +1,26 @@
+﻿@using Restaurnat.BLL.ModelVM.Feedback
+@model UpdateFeedbackVM
+
+<!-- Section Title -->
+<div class="container section-title">
+	<h2>Update Feedback<br></h2>
+	<p><span>Learn More</span> <span class="description-title">About Us</span></p>
+</div><!-- End Section Title -->
+
+
+<form asp-action="Update" asp-controller="Feedback">
+	<input type="hidden" asp-for="feedback_id" />
+   <div class="mb-3">
+		<label asp-for="rating" class="form-label"></label>
+		<input asp-for="rating" class="form-control" />
+		<span asp-validation-for="rating" class="text-danger"></span>
+	</div>
+
+	<div class="mb-3">
+		<label asp-for="comment" class="form-label"></label>
+		<input asp-for="comment" class="form-control" />
+		<span asp-validation-for="comment" class="text-danger"></span>
+	</div>
+
+	<button type="submit" class="btn btn-primary">Update</button>
+</form>

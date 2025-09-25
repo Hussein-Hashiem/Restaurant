@@ -1,0 +1,60 @@
+﻿@using Restaurnat.BLL.ModelVM.Account
+@model RegisterVM
+
+<!-- Section Title -->
+<div class="container section-title">
+	<h2>Register<br></h2>
+	<p><span>Learn More</span> <span class="description-title">About Us</span></p>
+</div><!-- End Section Title -->
+
+
+<form asp-action="Register" asp-controller="Account">
+   <div class="mb-3">
+		<label asp-for="first_name" class="form-label">First Name</label>
+		<input asp-for="first_name" class="form-control" />
+		<span asp-validation-for="first_name" class="text-danger"></span>
+	</div>
+
+	<div class="mb-3">
+		<label asp-for="last_name" class="form-label">Last Name</label>
+		<input asp-for="last_name" class="form-control" />
+		<span asp-validation-for="last_name" class="text-danger"></span>
+	</div>
+	<div class="mb-3">
+		<label asp-for="UserName" class="form-label">UserName</label>
+		<input asp-for="UserName" class="form-control" />
+		<span asp-validation-for="UserName" class="text-danger"></span>
+	</div>
+	<div class="mb-3">
+		<label asp-for="email" class="form-label">Email</label>
+		<input type="email" asp-for="email" class="form-control" />
+		<span asp-validation-for="email" class="text-danger"></span>
+	</div>
+	<div class="mb-3">
+		<label asp-for="password" class="form-label">Password</label>
+		<input type="password" asp-for="password" class="form-control" />
+		<span asp-validation-for="password" class="text-danger"></span>
+	</div>
+	<div class="mb-3">
+		<label asp-for="age" class="form-label">Age</label>
+		<input asp-for="age" class="form-control" />
+		<span asp-validation-for="age" class="text-danger"></span>
+	</div>
+	<div class="mb-3">
+		<label asp-for="country" class="form-label">Country</label>
+		<input asp-for="country" class="form-control" />
+		<span asp-validation-for="country" class="text-danger"></span>
+	</div>
+	<div class="mb-3">
+		<label asp-for="city" class="form-label">City</label>
+		<input asp-for="city" class="form-control" />
+		<span asp-validation-for="city" class="text-danger"></span>
+	</div>
+	<div class="mb-3">
+		<label asp-for="street" class="form-label">Street</label>
+		<input asp-for="street" class="form-control" />
+		<span asp-validation-for="street" class="text-danger"></span>
+	</div>
+
+	<button type="submit" class="btn btn-primary">Register</button>
+</form>

@@ -64,6 +64,18 @@ builder.Services.AddIdentityCore<User>(options => options.SignIn.RequireConfirme
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddTokenProvider<DataProtectorTokenProvider<User>>(TokenOptions.DefaultProvider);
 
+// Password Configuration
+builder.Services.AddIdentity<User, IdentityRole>(options =>
+{
+	// Default Password settings.
+    options.User.RequireUniqueEmail = true;
+	options.Password.RequireDigit = false;
+	options.Password.RequireLowercase = false;
+	options.Password.RequireNonAlphanumeric = false;
+	options.Password.RequireUppercase = false;
+	options.Password.RequiredLength = 6;
+	options.Password.RequiredUniqueChars = 0;
+}).AddEntityFrameworkStores<ApplicationDbContext>();
 
 var app = builder.Build();
 

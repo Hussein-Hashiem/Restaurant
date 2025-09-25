@@ -14,44 +14,45 @@ using Restaurnat.DAL.Entities;
 
 namespace Restaurnat.BLL.Mapper
 {
-    public class DomainProfile : Profile
-    {
-        public DomainProfile()
-        {
-            CreateMap<User, GetUserVM>().ReverseMap();
-            CreateMap<Feedback, GetFeedbackVM>().ForMember(dest => dest.UserName,
-               opt => opt.MapFrom(src => src.User.first_name + " " + src.User.last_name))
-           .ReverseMap();
+	public class DomainProfile : Profile
+	{
+		public DomainProfile()
+		{
+			CreateMap<User, GetUserVM>().ReverseMap();
+			CreateMap<Feedback, GetFeedbackVM>().ForMember(dest => dest.UserName,
+			   opt => opt.MapFrom(src => src.User.first_name + " " + src.User.last_name))
+		   .ReverseMap();
+			CreateMap<Feedback, CreateFeedbackVM>().ReverseMap();
 
-            CreateMap<Restaurant, CreateRestaurantVM>().ReverseMap();
-            CreateMap<Restaurant, GetRestaurantVM>().ReverseMap();
-            CreateMap<Restaurant, GetAllRestaurantVM>().ReverseMap();
-            CreateMap<Restaurant, UpdateRestaurantVM>().ReverseMap();
+			CreateMap<Restaurant, CreateRestaurantVM>().ReverseMap();
+			CreateMap<Restaurant, GetRestaurantVM>().ReverseMap();
+			CreateMap<Restaurant, GetAllRestaurantVM>().ReverseMap();
+			CreateMap<Restaurant, UpdateRestaurantVM>().ReverseMap();
 
 
-            CreateMap<Payment, CreatePaymentVM>().ReverseMap();
-            CreateMap<Payment, GetAllPaymentVM>().ReverseMap();
-            CreateMap<Payment, GetPaymentVM>().ReverseMap();
-            CreateMap<Payment, UpdatePaymentVM>().ReverseMap();
+			CreateMap<Payment, CreatePaymentVM>().ReverseMap();
+			CreateMap<Payment, GetAllPaymentVM>().ReverseMap();
+			CreateMap<Payment, GetPaymentVM>().ReverseMap();
+			CreateMap<Payment, UpdatePaymentVM>().ReverseMap();
 
-            CreateMap<Chef, CreateChefVM>().ReverseMap();
-            CreateMap<Chef, EditChefVM>().ReverseMap();
-            CreateMap<Chef, GetChefVM>().ReverseMap();
+			CreateMap<Chef, CreateChefVM>().ReverseMap();
+			CreateMap<Chef, EditChefVM>().ReverseMap();
+			CreateMap<Chef, GetChefVM>().ReverseMap();
 
-            CreateMap<Event, CreateEventVM>().ReverseMap();
-            CreateMap<Event, EditEventVM>().ReverseMap();
-            CreateMap<Event, GetEventVM>().ReverseMap();
+			CreateMap<Event, CreateEventVM>().ReverseMap();
+			CreateMap<Event, EditEventVM>().ReverseMap();
+			CreateMap<Event, GetEventVM>().ReverseMap();
 
-            CreateMap<Item, GetItemVM>().ReverseMap();
-            CreateMap<Item, List<GetItemVM>>().ReverseMap();
+			CreateMap<Item, GetItemVM>().ReverseMap();
+			CreateMap<Item, List<GetItemVM>>().ReverseMap();
 
-            CreateMap<Menu, GetMenuVM>().ReverseMap();
-            CreateMap<Menu, List<GetMenuVM>>().ReverseMap();
-            
-            CreateMap<Reservation, GetReservationVM>().ReverseMap();
-            CreateMap<Reservation, List<GetReservationVM>>().ReverseMap();
+			CreateMap<Menu, GetMenuVM>().ReverseMap();
+			CreateMap<Menu, List<GetMenuVM>>().ReverseMap();
 
-            CreateMap<Table, GetTableVM>().ReverseMap();
+			CreateMap<Reservation, GetReservationVM>().ReverseMap();
+			CreateMap<Reservation, List<GetReservationVM>>().ReverseMap();
+       
+        CreateMap<Table, GetTableVM>().ReverseMap();
             CreateMap<Table, List<GetTableVM>>().ReverseMap();
             CreateMap<Table, CreateTableVM>().ReverseMap();
             CreateMap<Table, UpdateTableVM>().ReverseMap();
@@ -59,9 +60,5 @@ namespace Restaurnat.BLL.Mapper
             CreateMap<Item, CreateItemVM>().ReverseMap();
             CreateMap<Item, UpdateItemVM>().ReverseMap();
             CreateMap<Item, GetItemVM>().ReverseMap();
-
-
-
-        }
-    }
-}
+		}
+	}

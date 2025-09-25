@@ -23,7 +23,7 @@ namespace Restaurnat.BLL.Services.Implementation
             try
             {
                 var imagepath = Upload.UploadFile("Files", newuser.image);
-                User user = new User(newuser.first_name, newuser.last_name, newuser.age, newuser.country, newuser.city, newuser.street, imagepath);
+                User user = new User(newuser.first_name, newuser.last_name, newuser.age, newuser.country, newuser.city, newuser.street);
                 var result = userRepo.Create(user);
                 if (result.Item1) return (true, "User Created Successfully");
                 else return (false, result.Item2);
@@ -65,11 +65,11 @@ namespace Restaurnat.BLL.Services.Implementation
             catch (Exception ex) { return (false, ex.Message, null); }
         }
 
-        public (bool, string) Update(int id, UpdateUserVM curr)
+        public (bool, string) Update(string id, UpdateUserVM curr)
         {
             try
             {
-                var user = userRepo.GetById(id);
+                var user = userRepo.GetById(int.Parse(id));
                 var imagepath = Upload.UploadFile("Files", curr.image);
                 var result = user.Update(curr.first_name, curr.last_name, curr.age, curr.country, curr.city, curr.street, imagepath);
                 if (result)
