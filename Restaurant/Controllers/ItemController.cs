@@ -98,8 +98,7 @@ namespace Restaurant.PL.Controllers
             {
                 if (!ModelState.IsValid)
                     return View(item);
-                var entity = _mapper.Map<Item>(item);
-                var result = _itemService.Update(entity);
+                var result = _itemService.Update(item.id,item);
                 if (!result)
                 {
                     ModelState.AddModelError("", "Update failed");

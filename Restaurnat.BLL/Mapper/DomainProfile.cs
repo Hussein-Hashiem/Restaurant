@@ -51,14 +51,15 @@ namespace Restaurnat.BLL.Mapper
 
 			CreateMap<Reservation, GetReservationVM>().ReverseMap();
 			CreateMap<Reservation, List<GetReservationVM>>().ReverseMap();
-       
-        CreateMap<Table, GetTableVM>().ReverseMap();
-            CreateMap<Table, List<GetTableVM>>().ReverseMap();
-            CreateMap<Table, CreateTableVM>().ReverseMap();
-            CreateMap<Table, UpdateTableVM>().ReverseMap();
 
-            CreateMap<Item, CreateItemVM>().ReverseMap();
-            CreateMap<Item, UpdateItemVM>().ReverseMap();
-            CreateMap<Item, GetItemVM>().ReverseMap();
+			CreateMap<Table, GetTableVM>().ReverseMap();
+			CreateMap<Table, List<GetTableVM>>().ReverseMap();
+			CreateMap<Table, CreateTableVM>().ReverseMap();
+			CreateMap<Table, UpdateTableVM>().ReverseMap();
+
+			CreateMap<Item, CreateItemVM>().ReverseMap();
+			CreateMap<Item, UpdateItemVM>().ReverseMap();
+			CreateMap<Item, GetItemVM>().ReverseMap();
 		}
 	}
+}

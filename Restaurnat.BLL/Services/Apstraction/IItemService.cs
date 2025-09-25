@@ -9,8 +9,8 @@ namespace Restaurnat.BLL.Services.Apstraction
     {
         List<GetItemVM> GetAll();
         GetItemVM GetById(int id);
-        (bool, string) Create(Item newItem);
-        bool Update( Item newItem);
+        (bool, string) Create(CreateItemVM newItem);
+        bool Update(int id, UpdateItemVM newItem);
         bool Delete(int id);
         
     }
