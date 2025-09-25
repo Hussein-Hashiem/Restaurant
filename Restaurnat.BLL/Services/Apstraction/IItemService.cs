@@ -1,6 +1,7 @@
 ﻿
 
 using Restaurnat.BLL.ModelVM.Item;
+using Restaurnat.DAL.Entities;
 
 namespace Restaurnat.BLL.Services.Apstraction
 {
@@ -8,8 +9,9 @@ namespace Restaurnat.BLL.Services.Apstraction
     {
         List<GetItemVM> GetAll();
         GetItemVM GetById(int id);
-        (bool, string) Create(CreateItemVM newItem);
-        bool Update(int id, EditItemVM newItem);
+        (bool, string) Create(Item newItem);
+        bool Update( Item newItem);
         bool Delete(int id);
+        
     }
 }
