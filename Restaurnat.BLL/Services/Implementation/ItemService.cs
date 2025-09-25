@@ -58,7 +58,7 @@ namespace Restaurnat.BLL.Services.Implementation
             catch (Exception) { throw; }
         }
 
-        public bool Update(int id, EditItemVM newItem)
+        public bool Update(int id, UpdateItemVM newItem)
         {
             try {
                 var item = itemRepo.GetById(id);
