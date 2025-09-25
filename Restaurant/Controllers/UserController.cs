@@ -1,16 +1,89 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Restaurnat.BLL.ModelVM.User;
+using Restaurnat.BLL.Services.Apstraction;
 
 namespace Restaurant.PL.Controllers
 {
-    public class UserController : Controller
-    {
-        public IActionResult Index()
-        {
-            return View();
-        }
-        public IActionResult Create()
-        {
-            return View();
-        }
-    }
+	public class UserController : Controller
+	{
+		private readonly IUserService userService;
+		public UserController(IUserService userService)
+		{
+			this.userService = userService;
+		}
+		public IActionResult Index()
+		{
+			var users = userService.GetAll();
+			return View(users.Item3);
+		}
+		[HttpGet]
+		public IActionResult Create()
+		{
+			return View();
+		}
+		[HttpPost]
+		public IActionResult Create(CreateUserVM newuser)
+		{
+			if (!ModelState.IsValid) return View(newuser);
+			var result = userService.Create(newuser);
+			if (result.Item1) // Success
+				return RedirectToAction("Index");
+			ViewBag.Error = result.Item2;
+			return View(newuser);
+		}
+		[HttpGet]
+		public IActionResult Update(int id)
+		{
+			var user = userService.GetByID(id);
+			if (!user.Item1) return NotFound();
+
+			var updateVM = new UpdateUserVM
+			{
+				Id = user.Item3.Id,
+				first_name = user.Item3.first_name,
+				last_name = user.Item3.last_name,
+				age = user.Item3.age,
+				country = user.Item3.country,
+				city = user.Item3.city,
+				street = user.Item3.street,
+				ExistingImagePath = user.Item3.imagepath
+			};
+
+			return View(updateVM);
+		}
+
+		[HttpPost]
+		public IActionResult Update(UpdateUserVM updatedUser)
+		{
+			if (!ModelState.IsValid) return View(updatedUser);
+
+			var result = userService.Update(updatedUser.Id, updatedUser);
+
+			if (result.Item1)
+				return RedirectToAction("Index");
+
+			ViewBag.Error = result.Item2;
+			return View(updatedUser);
+		}
+		[HttpGet]
+		public IActionResult Delete(int id)
+		{
+			var user = userService.GetByID(id);
+			if (!user.Item1) return NotFound();
+
+			return View(user);
+		}
+		[HttpPost, ActionName("Delete")]
+		public IActionResult DeleteConfirmed(int id)
+		{
+			var result = userService.Delete(id);
+
+			if (result.Item1)
+				return RedirectToAction("Index");
+
+			ViewBag.Error = result.Item2;
+			var user = userService.GetByID(id);
+			return View("Delete", user);
+		}
+	}
 }

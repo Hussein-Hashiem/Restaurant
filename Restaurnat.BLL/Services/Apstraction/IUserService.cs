@@ -8,7 +8,7 @@ namespace Restaurnat.BLL.Services.Apstraction
         (bool, string, List<GetUserVM>) GetAll();
         (bool, string, GetUserVM) GetByID(int id);
         (bool, string) Create(CreateUserVM newuser);
-        (bool, string) Update(int id, UpdateUserVM curr);
+        (bool, string) Update(string id, UpdateUserVM curr);
         (bool, string) Delete(int id);
     }
 }

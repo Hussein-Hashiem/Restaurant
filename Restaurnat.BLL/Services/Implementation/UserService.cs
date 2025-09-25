@@ -65,11 +65,11 @@ namespace Restaurnat.BLL.Services.Implementation
             catch (Exception ex) { return (false, ex.Message, null); }
         }
 
-        public (bool, string) Update(int id, UpdateUserVM curr)
+        public (bool, string) Update(string id, UpdateUserVM curr)
         {
             try
             {
-                var user = userRepo.GetById(id);
+                var user = userRepo.GetById(int.Parse(id));
                 var imagepath = Upload.UploadFile("Files", curr.image);
                 var result = user.Update(curr.first_name, curr.last_name, curr.age, curr.country, curr.city, curr.street, imagepath);
                 if (result)

@@ -66,5 +66,10 @@ namespace Restaurant.PL.Controllers
 			}
 			return View();
 		}
+		public async Task<IActionResult> LogOff()
+		{
+			await signInManager.SignOutAsync();
+			return RedirectToAction("Login");
+		}
 	}
 }
