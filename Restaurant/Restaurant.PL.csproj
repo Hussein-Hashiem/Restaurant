@@ -17,7 +17,9 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
   </ItemGroup>
-
+  <ItemGroup>
+     <PackageReference Include="Microsoft.Net.Compilers.Toolset" Version="4.9.0" PrivateAssets="all" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Restaurnat.BLL\Restaurnat.BLL.csproj" />
   </ItemGroup>
