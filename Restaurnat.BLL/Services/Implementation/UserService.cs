@@ -23,7 +23,7 @@ namespace Restaurnat.BLL.Services.Implementation
             try
             {
                 var imagepath = Upload.UploadFile("Files", newuser.image);
-                User user = new User(newuser.first_name, newuser.last_name, newuser.age, newuser.country, newuser.city, newuser.street, imagepath);
+                User user = new User(newuser.first_name, newuser.last_name, newuser.age, newuser.country, newuser.city, newuser.street);
                 var result = userRepo.Create(user);
                 if (result.Item1) return (true, "User Created Successfully");
                 else return (false, result.Item2);

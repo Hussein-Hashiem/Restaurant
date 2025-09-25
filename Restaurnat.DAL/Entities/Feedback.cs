@@ -13,13 +13,13 @@ namespace Restaurnat.DAL.Entities
         public User User { get; private set; }
         public int rating { get; private set; }
         public string? comment { get; private set; }
-        public DateTime CreatedOn { get; private set; }
-        public string CreatedBy { get; private set; }
+        public DateTime? CreatedOn { get; private set; }
+        public string? CreatedBy { get; private set; }
         public DateTime? ModifiedOn { get; private set; }
         public string? ModifiedBy { get; private set; }
         public DateTime? DeletedOn { get; private set; }
         public string? DeletedBy { get; private set; }
-        public bool IsDeleted { get; private set; } = false;
+        public bool? IsDeleted { get; private set; } = false;
         public bool Update(int rating, string comment)
         {
             if (rating == 0) return false;

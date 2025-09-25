@@ -6,7 +6,11 @@ namespace Restaurnat.DAL.Entities
 {
     public class User : IdentityUser
     {
-        public User(string first_name, string last_name, int age, string country, string city, string street, string imagepath)
+        public User()
+        {
+            
+        }
+        public User(string first_name, string last_name, int age, string country, string city, string street)
         {
             if (string.IsNullOrEmpty(first_name) || string.IsNullOrEmpty(last_name) || age == 0 || string.IsNullOrEmpty(country) || string.IsNullOrEmpty(city) || string.IsNullOrEmpty(street))
                 throw new ArgumentException("Invalid arguments to create a User");
@@ -16,7 +20,6 @@ namespace Restaurnat.DAL.Entities
             this.country = country;
             this.city = city;
             this.street = street;
-            this.imagepath = imagepath;
             this.CreatedOn = DateTime.Now;
         }
         public string first_name { get; private set; }
@@ -28,13 +31,13 @@ namespace Restaurnat.DAL.Entities
         public string? imagepath { get; private set; }
         public List<Feedback> Feedbacks { get; private set; }
         public List<Reservation> Reservations { get; private set; }
-        public DateTime CreatedOn { get; private set; }
-        public string CreatedBy { get; private set; }
+        public DateTime? CreatedOn { get; private set; }
+        public string? CreatedBy { get; private set; }
         public DateTime? ModifiedOn { get; private set; }
         public string? ModifiedBy { get; private set; }
         public DateTime? DeletedOn { get; private set; }
         public string? DeletedBy { get; private set; }
-        public bool IsDeleted { get; private set; } = false;
+        public bool? IsDeleted { get; private set; } = false;
         public bool Update(string first_name, string last_name, int age, string country, string city, string street, string imagepath)
         {
             if (string.IsNullOrEmpty(first_name) || string.IsNullOrEmpty(last_name) || age == 0 || string.IsNullOrEmpty(country) || string.IsNullOrEmpty(city) || string.IsNullOrEmpty(street)) return false;
