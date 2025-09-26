@@ -21,7 +21,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlServer(connectionString));
 
 // Auto Mapper
-builder.Services.AddAutoMapper(typeof(DomainProfile));
+builder.Services.AddAutoMapper(x => x.AddProfile(new DomainProfile()));
 
 // Repositries Registration
 builder.Services.AddScoped<IUserRepo, UserRepo>();

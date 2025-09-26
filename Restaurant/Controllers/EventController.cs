@@ -13,6 +13,10 @@ namespace Restaurant.PL.Controllers
         {
             this.eservice = evservice;
         }
+        public IActionResult Index()
+        {
+            return View();
+        }
 
         [HttpGet]
         public ActionResult Create()

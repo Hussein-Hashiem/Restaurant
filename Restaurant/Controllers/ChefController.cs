@@ -14,6 +14,10 @@ namespace Restaurant.PL.Controllers
         {
             this.cservice = chservice;
         }
+        public IActionResult Index()
+        {
+            return View();
+        }
 
         [HttpGet]
         public ActionResult Create()

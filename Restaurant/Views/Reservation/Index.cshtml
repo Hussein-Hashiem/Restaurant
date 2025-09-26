@@ -1,0 +1,109 @@
+﻿  <!-- Book A Table Section -->
+    <section id="book-a-table" class="book-a-table section">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-5 mb-5">
+          <div class="col-lg-6" data-aos="fade-right" data-aos-delay="200">
+            <div class="reservation-info">
+              <div class="text-content">
+                <h3>Book Your Table</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo. Aliquam erat volutpat.</p>
+
+                <div class="reservation-details mt-4">
+                  <div class="detail-item">
+                    <i class="bi bi-clock"></i>
+                    <div>
+                      <h5>Opening Hours</h5>
+                      <p>Monday - Friday: 11:00 AM - 11:00 PM<br>
+                        Saturday - Sunday: 10:00 AM - 12:00 AM</p>
+                    </div>
+                  </div>
+
+                  <div class="detail-item">
+                    <i class="bi bi-geo-alt"></i>
+                    <div>
+                      <h5>Location</h5>
+                      <p>1234 Main Street, Suite 100<br>
+                        Boston, MA 02110</p>
+                    </div>
+                  </div>
+
+                  <div class="detail-item">
+                    <i class="bi bi-telephone"></i>
+                    <div>
+                      <h5>Call Us</h5>
+                      <p>+1 (617) 555-1234</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6" data-aos="fade-left" data-aos-delay="300">
+            <div class="reservation-image">
+              <img src="assets/img/restaurant/showcase-7.webp" alt="Restaurant interior" class="img-fluid rounded">
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12" data-aos="fade-up" data-aos-delay="400">
+            <div class="reservation-form-wrapper">
+              <div class="form-header">
+                <h3>Book A Table</h3>
+                <p>Please fill the form below to make a reservation</p>
+              </div>
+
+              <form action="forms/book-a-table.php" method="post" role="form" class="php-email-form mt-4">
+                <div class="row gy-4">
+                  <div class="col-lg-4 form-group">
+                    <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
+                  </div>
+                  <div class="col-lg-4 form-group">
+                    <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
+                  </div>
+                  <div class="col-lg-4 form-group">
+                    <input type="text" class="form-control" name="phone" placeholder="Your Phone" required="">
+                  </div>
+                  <div class="col-lg-4 form-group">
+                    <select name="people" class="form-select" required="">
+                      <option value="">Number of guests</option>
+                      <option value="1">1 Person</option>
+                      <option value="2">2 People</option>
+                      <option value="3">3 People</option>
+                      <option value="4">4 People</option>
+                      <option value="5">5 People</option>
+                      <option value="6">6+ People</option>
+                    </select>
+                  </div>
+                  <div class="col-lg-4 form-group">
+                    <input type="date" name="date" class="form-control" placeholder="Date" required="">
+                  </div>
+                  <div class="col-lg-4 form-group">
+                    <input type="time" class="form-control" name="time" id="time" placeholder="Time" required="">
+                  </div>
+
+                  <div class="form-group mt-4">
+                    <textarea class="form-control" name="message" rows="3" placeholder="Special Requests (Optional)"></textarea>
+                  </div>
+                </div>
+
+                <div class="my-3">
+                  <div class="loading">Loading</div>
+                  <div class="error-message"></div>
+                  <div class="sent-message">Your booking request was sent. We will call back or send an Email to confirm your reservation. Thank you!</div>
+                </div>
+
+                <div class="text-center mt-4">
+                  <button type="submit" class="btn-book-table">Book Now</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section><!-- /Book A Table Section -->

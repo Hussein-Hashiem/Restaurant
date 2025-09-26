@@ -6,10 +6,10 @@ using Restaurnat.BLL.Services.Implementation;
 
 namespace Restaurant.PL.Controllers
 {
-    public class ReservationConrtoller : Controller
+    public class ReservationController : Controller
     {
         private readonly IReservationService _reservationService;
-        public ReservationConrtoller(IReservationService reservationService)
+        public ReservationController(IReservationService reservationService)
         {
             _reservationService = reservationService;
         }
