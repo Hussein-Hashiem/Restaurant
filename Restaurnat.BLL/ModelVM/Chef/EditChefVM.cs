@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Restaurnat.BLL.ModelVM.Chef
 {
     public class EditChefVM
     {
-        public int chef_id { get;  set; }
+        public int chef_id { get; set; }
 
         [Required(ErrorMessage = "Name is required")]
         [MinLength(3)]
@@ -17,7 +18,7 @@ namespace Restaurnat.BLL.ModelVM.Chef
 
         [Required(ErrorMessage = "Age is required, range between 20-80")]
         [Range(20, 80)]
-        public string age { get; set; }
+        public int age { get; set; }
 
         [Required(ErrorMessage = "Write a short paragraph about the chef")]
         [MinLength(10)]
@@ -36,7 +37,7 @@ namespace Restaurnat.BLL.ModelVM.Chef
         [Required(ErrorMessage = "Image is required")]
         public string imagepath { get; set; }
 
-        [Required(ErrorMessage = "Should belong to the restaurant")]
+        //[Required(ErrorMessage = "Should belong to the restaurant")]
         [Range(0, 100)]
         public int restaurant_id { get; set; }
     }

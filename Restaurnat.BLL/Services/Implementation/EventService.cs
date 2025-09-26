@@ -34,7 +34,7 @@ namespace Restaurnat.BLL.Services.Implementation
 
         public (bool, string?) Delete(int id)
         {
-            if ( id < 0) return (false, "No id is entered");
+            if (id < 0) return (false, "No id is entered");
             var result = eventRepo.Delete(id);
             if (result.Item1) return (true, null);
             return (false, result.Item2);
@@ -74,7 +74,7 @@ namespace Restaurnat.BLL.Services.Implementation
         public (bool, string?) Update(EditEventVM eventy)
         {
             if (eventy == null) { return (false, "You passed null argument"); }
-            
+
             var event_mapped = event_mapper.Map<Event>(eventy);
             var result = eventRepo.Update(event_mapped);
             if (result.Item1) return (true, null);

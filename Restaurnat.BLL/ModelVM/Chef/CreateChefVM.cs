@@ -11,17 +11,17 @@ namespace Restaurnat.BLL.ModelVM.Chef
 {
     public class CreateChefVM
     {
-        [Required(ErrorMessage ="Name is required")]
+        [Required(ErrorMessage = "Name is required")]
         [MinLength(3)]
-        public string name { get;  set; }
+        public string name { get; set; }
 
         [Required(ErrorMessage = "Age is required, range between 20-80")]
-        [Range(20,80)]
-        public string age { get; set; }
+        [Range(20, 80)]
+        public int age { get; set; }
 
         [Required(ErrorMessage = "Write a short paragraph about the chef")]
         [MinLength(10)]
-        public string about { get;  set; }
+        public string about { get; set; }
 
         [Required(ErrorMessage = "Category is required, If Chef is a new one or general chef, enter -1")]
         [Range(-1, 100)] //if -1 this means he is still training
@@ -30,16 +30,16 @@ namespace Restaurnat.BLL.ModelVM.Chef
 
         [Required(ErrorMessage = "Years of Experience is required, Ebherna yaa chef")]
         [Range(0, 100)]
-        public int experience_years { get; set; } // if 0 he is training by default 
-        public bool work_now { get; set; } // later will be enum
+        public int experience_years { get; set; } 
+        public bool work_now { get; set; } 
 
-        [Required(ErrorMessage="Image is required")]
+        [Required(ErrorMessage = "Image is required")]
         public string imagepath { get; set; }
 
-        [Required(ErrorMessage = "Should belong to the restaurant")]
-        [Range(0,100)]
+        //[Required(ErrorMessage = "Should belong to the restaurant")]
+        [Range(0, 100)]
         public int restaurant_id { get; set; }
-        public DateTime CreatedOn { get;  set; }
-        public string CreatedBy { get;  set; }
+        public DateTime CreatedOn { get; set; }
+        public string CreatedBy { get; set; }
     }
 }
