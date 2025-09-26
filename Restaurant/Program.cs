@@ -21,7 +21,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlServer(connectionString));
 
 // Auto Mapper
-builder.Services.AddAutoMapper(x => x.AddProfile(new DomainProfile()));
+builder.Services.AddAutoMapper(typeof(DomainProfile));
 
 // Repositries Registration
 builder.Services.AddScoped<IUserRepo, UserRepo>();
@@ -54,21 +54,21 @@ builder.Services.AddScoped<IChefService, ChefService>();
 // Identity
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
 .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
-    options =>
-    {
-        options.LoginPath = new PathString("/Account/Login");
-        options.AccessDeniedPath = new PathString("/Account/Login");
-    });
+	options =>
+	{
+		options.LoginPath = new PathString("/Account/Login");
+		options.AccessDeniedPath = new PathString("/Account/Login");
+	});
 
 builder.Services.AddIdentityCore<User>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddTokenProvider<DataProtectorTokenProvider<User>>(TokenOptions.DefaultProvider);
+				.AddEntityFrameworkStores<ApplicationDbContext>()
+				.AddTokenProvider<DataProtectorTokenProvider<User>>(TokenOptions.DefaultProvider);
 
 // Password Configuration
 builder.Services.AddIdentity<User, IdentityRole>(options =>
 {
 	// Default Password settings.
-    options.User.RequireUniqueEmail = true;
+	options.User.RequireUniqueEmail = true;
 	options.Password.RequireDigit = false;
 	options.Password.RequireLowercase = false;
 	options.Password.RequireNonAlphanumeric = false;
@@ -82,9 +82,9 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+	app.UseExceptionHandler("/Home/Error");
+	// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+	app.UseHsts();
 }
 
 app.UseHttpsRedirection();
@@ -96,7 +96,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+	name: "default",
+	pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

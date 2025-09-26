@@ -58,9 +58,8 @@ namespace Restaurant.PL.Controllers
             {
                 if (!ModelState.IsValid) return View(item);
 
-                var entity = _mapper.Map<Item>(item);
 
-                var (success, message) = _itemService.Create(entity);
+                var (success, message) = _itemService.Create(item);
 
                 if (!success)
                 {
