@@ -26,7 +26,7 @@ namespace Restaurant.PL.Controllers
 
 			if (result.Succeeded)
 			{
-				return RedirectToAction("Index", "User");
+				return RedirectToAction("Index", "Home");
 			}
 			else
 			{
@@ -43,13 +43,10 @@ namespace Restaurant.PL.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Register(RegisterVM registerVM)
 		{
+            if (!ModelState.IsValid)
+                return View(registerVM);
 			var user = new User(registerVM.first_name, registerVM.last_name, registerVM.age, registerVM.country, registerVM.city, registerVM.street);
-			//var user = new User()
-			//{
-			//	UserName = registerVM.UserName,
-			//	Email = registerVM.email,
-			//};
-			user.Email = registerVM.email;
+            user.Email = registerVM.email;
 			user.UserName = registerVM.UserName;
 			var result = await userManager.CreateAsync(user, registerVM.password);
 

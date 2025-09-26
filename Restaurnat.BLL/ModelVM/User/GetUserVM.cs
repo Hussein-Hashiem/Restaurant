@@ -11,5 +11,6 @@ namespace Restaurnat.BLL.ModelVM.User
         public string city { get; set; }
         public string street { get; set; }
         public string? imagepath { get; set; }
+        public string role { get; set; }
     }
 }

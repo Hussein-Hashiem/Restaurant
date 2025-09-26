@@ -55,12 +55,36 @@
           <li><a asp-controller="Reservation" asp-action="Index">Book a Table</a></li>
           <li><a asp-controller="Chef" asp-action="Index">Chefs</a></li>
           <li><a asp-controller="Event" asp-action="Index">Events</a></li>
+                    @if (User.Identity != null && User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+        <li><a asp-controller="Admin" asp-action="Index">Admin Dashboard</a></li>
+                    }
+
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
       <a class="btn-getstarted d-none d-sm-block" asp-controller="Reservation" asp-action="Index">Book a Table</a>
-
+      <nav  class="navmenu">
+              <ul>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>
+                            <a asp-controller="Account" asp-action="Profile">Hello, @User.Identity.Name</a>
+                        </li>
+                        <li>
+                                <form asp-controller="Account" asp-action="LogOff" method="post" class="d-inline">
+                                <button type="submit" class="nav-link btn btn-link p-0">Logout</button>
+                            </form>
+                        </li>
+                    }
+                    else
+                    {
+                        <li><a asp-controller="Account" asp-action="Login">Login</a></li>
+                        <li><a asp-controller="Account" asp-action="Register">Register</a></li>
+                    }
+              </ul>
+      </nav>
     </div>
   </header>
 

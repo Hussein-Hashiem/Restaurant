@@ -1,0 +1,45 @@
+﻿@using Restaurnat.BLL.ModelVM.User
+@model Task<(bool, string, List
+<GetUserVM>
+)>
+@{
+Layout = "~/Views/Shared/_AdminLayout.cshtml";
+ViewData["Title"] = "Dashboard";
+var modelData = await Model; // Await the task
+var users = modelData.Item3; // Get the List <GetUserVM>
+}
+<table class="table table-striped">
+   <thead>
+      <tr>
+         <th scope="col">#</th>
+         <th scope="col">Image</th>
+         <th scope="col">First</th>
+         <th scope="col">Last</th>
+         <th scope="col">Age</th>
+         <th scope="col">Country</th>
+         <th scope="col">City</th>
+         <th scope="col">Street</th>
+         <th scope="col">Role</th>
+      </tr>
+   </thead>
+   <tbody>
+      @{
+      int counter = 1;
+      }
+      @foreach (var i in users)
+      {
+      <tr>
+         <td>@counter</td>
+         <td><img src="~/Files/@i.imagepath" alt="No image available" width = "90" style = "border-radius: 20px;" /></td>
+         <td>@i.first_name</td>
+         <td>@i.last_name</td>
+         <td>@i.age</td>
+         <td>@i.country</td>
+         <td>@i.city</td>
+         <td>@i.street</td>
+         <td>@i.role</td>
+      </tr>
+      counter++;
+      }
+   </tbody>
+</table>

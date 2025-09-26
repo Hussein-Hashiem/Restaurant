@@ -23,5 +23,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Restaurnat.BLL\Restaurnat.BLL.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\Files\" />
+  </ItemGroup>
 
 </Project>

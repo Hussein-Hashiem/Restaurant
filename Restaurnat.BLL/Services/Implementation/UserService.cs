@@ -1,5 +1,6 @@
 ﻿
 using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Restaurnat.BLL.Helper;
 using Restaurnat.BLL.ModelVM.User;
 using Restaurnat.BLL.Services.Apstraction;
@@ -12,10 +13,13 @@ namespace Restaurnat.BLL.Services.Implementation
     {
         private readonly IUserRepo userRepo;
         private readonly IMapper mapper;
-        public UserService(IUserRepo userRepo, IMapper mapper)
+		private readonly UserManager<User> userManager;
+
+		public UserService(IUserRepo userRepo, IMapper mapper, UserManager<User> userManager)
         {
             this.userRepo = userRepo;
             this.mapper = mapper;
+            this.userManager = userManager;
         }
 
         public (bool, string) Create(CreateUserVM newuser)
@@ -42,18 +46,30 @@ namespace Restaurnat.BLL.Services.Implementation
             catch (Exception ex) { return (false, ex.Message); }
         }
 
-        public (bool, string, List<GetUserVM>) GetAll()
-        {
-            try
-            {
-                var allUsers = userRepo.GetAll();
-                var result = mapper.Map<List<GetUserVM>>(allUsers);
-                return (true, "Success", result);
-            }
-            catch (Exception ex) { return (false, ex.Message, null); }
-        }
 
-        public (bool, string, GetUserVM) GetByID(int id)
+		public async Task<(bool, string, List<GetUserVM>)> GetAll()
+		{
+			try
+			{
+				var allUsers = userRepo.GetAll();
+				var result = mapper.Map<List<GetUserVM>>(allUsers);
+
+				foreach (var userVM in result)
+				{
+					var user = await userManager.FindByIdAsync(userVM.Id);
+					var roles = await userManager.GetRolesAsync(user);
+					userVM.role = roles.FirstOrDefault() ?? "User";
+				}
+
+				return (true, "Success", result);
+			}
+			catch (Exception ex)
+			{
+				return (false, ex.Message, null);
+			}
+		}
+
+		public (bool, string, GetUserVM) GetByID(int id)
         {
             try
             {

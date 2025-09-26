@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] - Admin Dashboard</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/admin.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="d-flex" id="wrapper">
+
+        <!-- Sidebar -->
+        <div class="bg-dark text-white border-end" id="sidebar-wrapper">
+            <div class="sidebar-heading text-center py-4 fs-4 fw-bold border-bottom">Admin Panel</div>
+            <div class="list-group list-group-flush">
+                <a asp-controller="Admin" asp-action="Index" class="list-group-item list-group-item-action bg-dark text-white">Dashboard</a>
+                <a asp-controller="AdminUser" asp-action="Index" class="list-group-item list-group-item-action bg-dark text-white">Users</a>
+                <a asp-controller="Reservation" asp-action="Index" class="list-group-item list-group-item-action bg-dark text-white">Reservations</a>
+                <a asp-controller="Menu" asp-action="Index" class="list-group-item list-group-item-action bg-dark text-white">Menu</a>
+                <a asp-controller="Event" asp-action="Index" class="list-group-item list-group-item-action bg-dark text-white">Events</a>
+                <a asp-controller="Home" asp-action="Index" class="list-group-item list-group-item-action bg-dark text-white">Restaurant</a>
+                <a asp-controller="Account" asp-action="LogOff" class="list-group-item list-group-item-action bg-dark text-white">Logout</a>
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper" class="w-100">
+
+            <!-- Header -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <div class="container-fluid">
+                    <span class="navbar-text ms-auto">
+                        @User.Identity.Name
+                    </span>
+                </div>
+            </nav>
+            <!-- /Header -->
+
+            <!-- Main Content -->
+            <div class="container-fluid py-4">
+                @RenderBody()
+            </div>
+            <!-- /Main Content -->
+
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+</body>
+</html>

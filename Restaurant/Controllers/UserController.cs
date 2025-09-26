@@ -14,7 +14,7 @@ namespace Restaurant.PL.Controllers
 		public IActionResult Index()
 		{
 			var users = userService.GetAll();
-			return View(users.Item3);
+			return View(users);
 		}
 		[HttpGet]
 		public IActionResult Create()
