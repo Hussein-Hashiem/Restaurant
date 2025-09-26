@@ -2,20 +2,17 @@
 using Restaurnat.BLL.ModelVM.Chef;
 using Restaurnat.BLL.ModelVM.Event;
 using Restaurnat.BLL.Services.Apstraction;
+using Restaurnat.DAL.Entities;
 
 namespace Restaurant.PL.Controllers
 {
     public class EventController : Controller
     {
-      
+
         private readonly IEventService eservice;
         public EventController(IEventService evservice)
         {
             this.eservice = evservice;
-        }
-        public IActionResult Index()
-        {
-            return View();
         }
 
         [HttpGet]
@@ -25,7 +22,7 @@ namespace Restaurant.PL.Controllers
         }
 
         [HttpPost]
-        public ActionResult SaveChef(CreateEventVM ev)
+        public ActionResult SaveEvent(CreateEventVM ev)
         {
             if (!ModelState.IsValid)
             {
@@ -34,9 +31,8 @@ namespace Restaurant.PL.Controllers
                 {
                     return RedirectToAction("GetAll", "Event");
                 }
-
             }
-            return View(ev);
+            return View("Create", ev);
         }
         public IActionResult GetAll()
         {
@@ -44,7 +40,7 @@ namespace Restaurant.PL.Controllers
 
             if (events.Item2 != null)
             {
-                ViewBag.Message(events.Item2);
+                ViewBag.Message = events.Item2;
             }
             return View(events.Item1);
         }
@@ -65,21 +61,31 @@ namespace Restaurant.PL.Controllers
 
             if (result.Item2 != null)
             {
-                ViewBag.Message(result.Item2);
                 return RedirectToAction("GetAll", "Event");
             }
             return View(result.Item1);
         }
-        public IActionResult Edit(EditEventVM ev)
+
+        [HttpGet]
+        public IActionResult Edit(int id) //done
         {
-            var result = eservice.Update(ev);
+            var result = eservice.GetById(id);
 
             if (result.Item2 != null)
             {
-                ViewBag.Message(result.Item2);
-                return RedirectToAction("GetAll", "Chef");
+                return RedirectToAction("GetAll", "Event");
             }
             return View(result.Item1);
         }
+        [HttpPost]
+        public IActionResult Edit(int id, EditEventVM ev)
+        {
+            ev.event_id = id;
+            var result = eservice.Update(ev);
+            return RedirectToAction("GetAll", "Event");
+
+        }
+        //---------------------------------------------------------------------------------
+
     }
 }

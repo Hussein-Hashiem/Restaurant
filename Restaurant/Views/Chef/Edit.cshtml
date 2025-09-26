@@ -1,8 +1,8 @@
 ﻿@using Restaurnat.BLL.ModelVM.Chef
-@model CreateChefVM
+@model GetChefVM
 
 @{
-    ViewData["Title"] = "Create Chef";
+    ViewData["Title"] = "Edit Chef";
     // Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -11,7 +11,12 @@
         Create Chef
     </div>
 
-    <form asp-controller="Chef" asp-action="SaveChef" enctype="multipart/form-data">
+    <form asp-controller="Chef" asp-action="Edit" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label class="form-label">Chef ID</label>
+            <input type="text" class="form-control" name="id"  value="@Model.chef_id" readonly />
+            <input type="hidden" asp-for="chef_id" />
+        </div>
         <div class="mb-3">
             <label asp-for="name" class="form-label"></label>
             <input asp-for="name" type="text" class="form-control" />
@@ -52,29 +57,34 @@
             <input asp-for="work_now" class="form-check-input" type="checkbox" />
             <label asp-for="work_now" class="form-check-label"></label>
         </div>
-
+        @if (!string.IsNullOrEmpty(Model.imagepath))
+        {
+              <img src="~/Files/@Model.imagepath" alt="Chef Image" style="width:70px; height:70px; object-fit:cover; border-radius:50%;" />
+        }
+        else
+        {
+           <span class="text-muted">No Image</span>
+        }
         <div class="mb-3">
             <label for="img" class="form-label">Chef Image</label>
             <input type="file" name="img" class="form-control" id="img" />
             <span asp-validation-for="imagepath" class="text-danger"></span>
         </div>
 
-        @* <div class="mb-3">
+        <div class="mb-3">
             <label asp-for="restaurant_id" class="form-label">Restaurant</label>
             <select asp-for="restaurant_id" class="form-select">
                 <option value="">-- Select Restaurant --</option>
-                <option value="1">Restaurant A</option>
-                <option value="2">Restaurant B</option>
+                <option value=1>Restaurant A</option>
+                <option value=2>Restaurant A</option>
+                <option value=3>Restaurant B</option>
                 <!-- Fill from DB in real case -->
             </select>
             <span asp-validation-for="restaurant_id" class="text-danger"></span>
-        </div> *@
+        </div>
 
-        <!-- Hidden fields for audit -->
-        <input asp-for="CreatedOn" type="hidden" value="@DateTime.Now" />
-        <input asp-for="CreatedBy" type="hidden" value="AdminUser" />
 
-        <button type="submit" class="btn btn-primary">Create Chef</button>
+        <button type="submit" class="btn btn-primary">Edit Chef</button>
     </form>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
