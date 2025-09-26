@@ -70,7 +70,7 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li>
-                            <a asp-controller="Account" asp-action="Profile">Hello, @User.Identity.Name</a>
+                            <a asp-controller="Profile" asp-action="Index">Hello, @User.Identity.Name</a>
                         </li>
                         <li>
                                 <form asp-controller="Account" asp-action="LogOff" method="post" class="d-inline">

@@ -1,0 +1,23 @@
+﻿@using Restaurnat.DAL.Entities
+@model User
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "My Profile";
+}
+
+<section id="profile" class="profile section">
+    <div class="container" data-aos="fade-up">
+        <div class="row g-4 align-items-center">
+            <div class="col-lg-4 text-center">
+                <img src="~/Files/@Model.imagepath" alt="Profile Picture" class="img-fluid rounded-3" style="max-width: 250px;">
+            </div>
+            <div class="col-lg-8">
+                <h2>@Model.first_name @Model.last_name</h2>
+                <p><strong>Age:</strong> @Model.age</p>
+                <p><strong>Country:</strong> @Model.country</p>
+                <p><strong>City:</strong> @Model.city</p>
+                <p><strong>Street:</strong> @Model.street</p>
+            </div>
+        </div>
+    </div>
+</section>

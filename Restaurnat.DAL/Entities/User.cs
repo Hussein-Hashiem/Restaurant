@@ -21,6 +21,7 @@ namespace Restaurnat.DAL.Entities
             this.city = city;
             this.street = street;
             this.CreatedOn = DateTime.Now;
+            this.imagepath = "avatar.png";
         }
         public string first_name { get; private set; }
         public string last_name { get; private set; }
