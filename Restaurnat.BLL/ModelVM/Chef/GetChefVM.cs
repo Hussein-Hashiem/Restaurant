@@ -11,7 +11,7 @@ namespace Restaurnat.BLL.ModelVM.Chef
     {
         public int chef_id { get; set; }
         public string name { get; set; }
-        public string age { get;  set; }
+        public int age { get;  set; }
         public string about { get; set; }
         public string category { get; set; }
         public int experience_years { get; set; }

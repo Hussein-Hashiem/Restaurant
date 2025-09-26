@@ -29,7 +29,7 @@ namespace Restaurant.PL.Controllers
 			if (result.Item1) // Success
 				return RedirectToAction("Index");
 			ViewBag.Error = result.Item2;
-			return View(newuser);
+			return View(newuser); 
 		}
 		[HttpGet]
 		public IActionResult Update(int id)

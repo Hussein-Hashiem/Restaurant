@@ -43,8 +43,7 @@ namespace Restaurnat.BLL.Mapper
 			CreateMap<Event, EditEventVM>().ReverseMap();
 			CreateMap<Event, GetEventVM>().ReverseMap();
 
-			CreateMap<Item, GetItemVM>().ReverseMap();
-			CreateMap<Item, List<GetItemVM>>().ReverseMap();
+			
 
 			CreateMap<Menu, GetMenuVM>().ReverseMap();
 			CreateMap<Menu, List<GetMenuVM>>().ReverseMap();
@@ -57,9 +56,6 @@ namespace Restaurnat.BLL.Mapper
 			CreateMap<Table, CreateTableVM>().ReverseMap();
 			CreateMap<Table, UpdateTableVM>().ReverseMap();
 
-			CreateMap<Item, CreateItemVM>().ReverseMap();
-			CreateMap<Item, UpdateItemVM>().ReverseMap();
-			CreateMap<Item, GetItemVM>().ReverseMap();
 		}
 	}
 }
