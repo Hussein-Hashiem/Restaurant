@@ -74,7 +74,7 @@ namespace Restaurnat.DAL.Repo.Implementation
                 return (false, "Something went wrong");
             }
         }
-       
+
 
         public (bool, string?) Delete(int id, string deletedBy)
         {
@@ -87,7 +87,7 @@ namespace Restaurnat.DAL.Repo.Implementation
                     DB.SaveChanges();
                     return (true, null);
                 }
-                
+
             }
             return (false, "Something went wrong");
         }
@@ -104,14 +104,24 @@ namespace Restaurnat.DAL.Repo.Implementation
 
         public (List<Chef>, string?) GetAll()
         {
-            var result = DB.Chefs.Where(ch => ch.IsDeleted== false).ToList();
+            //var result = DB.Chefs.Where(ch => ch.IsDeleted== false).ToList();
+            var result = DB.Chefs.ToList();
             if (result.Count > 0)
             {
                 return (result, null);
             }
             return (null, "There is no Data");
         }
+        //public (List<Chef>, string?) GetAllAdmin()
+        //{
+        //    var result = DB.Chefs.ToList();
+        //    if (result.Count > 0)
+        //    {
+        //        return (result, null);
+        //    }
+        //    return (null, "There is no Data");
+        //}
 
-        
+
     }
 }
