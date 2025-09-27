@@ -36,7 +36,6 @@ namespace Restaurnat.BLL.ModelVM.Chef
         [Required(ErrorMessage = "Image is required")]
         public string imagepath { get; set; }
 
-        //[Required(ErrorMessage = "Should belong to the restaurant")]
         [Range(0, 100)]
         public int restaurant_id { get; set; }
         public DateTime CreatedOn { get; set; }

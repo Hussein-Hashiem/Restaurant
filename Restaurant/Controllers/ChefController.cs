@@ -17,6 +17,16 @@ namespace Restaurant.PL.Controllers
             this.cservice = chservice;
             this._emailService = _emailService;
         }
+        public ActionResult Index() 
+        {
+            var chefs = cservice.GetAll();
+
+            if (!string.IsNullOrEmpty(chefs.Item2))
+            {
+                ViewBag.Message = chefs.Item2;
+            }
+            return View(chefs.Item1);
+        }
 
         [HttpGet]
         public ActionResult Create() //done
@@ -34,7 +44,7 @@ namespace Restaurant.PL.Controllers
                 {
                     var emailModel = new EmailSendVM
                     {
-                        ToEmail = "Sief.gamal2006@gmail.com",
+                        ToEmail = "ahmednoran200475@gmail.com",
                         Subject = "New Chef Created",
                         Message = $"Chef {chef.name} has been added successfully!"
                     };
@@ -54,8 +64,7 @@ namespace Restaurant.PL.Controllers
             }
             return View(chefs.Item1);
         }
-
-
+        
         public IActionResult Delete(int id) //done
         {
             var result = cservice.Delete(id);
@@ -66,7 +75,16 @@ namespace Restaurant.PL.Controllers
             }
             return RedirectToAction("GetAll", "Chef");
         }
+        public IActionResult Restore(int id) 
+        {
+            var result = cservice.Restore(id);
 
+            if (result.Item2 != null)
+            {
+                ViewBag.Message(result.Item2);
+            }
+            return RedirectToAction("GetAll", "Chef");
+        }
         public IActionResult GetById(int id)
         {
             var result = cservice.GetById(id);

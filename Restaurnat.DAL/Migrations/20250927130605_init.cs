@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Restaurnat.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class inittt : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -71,14 +71,13 @@ namespace Restaurnat.DAL.Migrations
                     chef_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    age = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    age = table.Column<int>(type: "int", nullable: false),
                     about = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     categoryId = table.Column<int>(type: "int", nullable: false),
                     category = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     experience_years = table.Column<int>(type: "int", nullable: false),
                     work_now = table.Column<bool>(type: "bit", nullable: false),
                     imagepath = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    restaurant_id = table.Column<int>(type: "int", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
