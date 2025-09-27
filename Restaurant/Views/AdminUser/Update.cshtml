@@ -1,0 +1,67 @@
+﻿@using Restaurnat.BLL.ModelVM.User
+@model UpdateUserVM
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Update User";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Update User</h2>
+
+    @if (ViewBag.Error != null)
+    {
+            <div class="alert alert-danger">@ViewBag.Error</div>
+    }
+
+    <form asp-action="Update" method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Id" />
+
+        <div class="mb-3">
+            <label asp-for="first_name" class="form-label">First Name</label>
+            <input asp-for="first_name" class="form-control" />
+            <span asp-validation-for="first_name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="last_name" class="form-label">Last Name</label>
+            <input asp-for="last_name" class="form-control" />
+            <span asp-validation-for="last_name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="age" class="form-label">Age</label>
+            <input asp-for="age" class="form-control" type="number" />
+            <span asp-validation-for="age" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="country" class="form-label">Country</label>
+            <input asp-for="country" class="form-control" />
+            <span asp-validation-for="country" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="city" class="form-label">City</label>
+            <input asp-for="city" class="form-control" />
+            <span asp-validation-for="city" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="street" class="form-label">Street</label>
+            <input asp-for="street" class="form-control" />
+            <span asp-validation-for="street" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="image" class="form-label">Profile Image</label>
+            <input asp-for="image" type="file" class="form-control" />
+            @if (!string.IsNullOrEmpty(Model.ExistingImagePath))
+            {
+                    <img src="~/Files/@Model.ExistingImagePath" alt="Current Image" class="img-thumbnail mt-2" style="max-width:150px;" />
+            }
+        </div>
+
+        <button type="submit" class="btn btn-success">Update</button>
+        <a asp-controller="AdminUser" asp-action="Index" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+</div>

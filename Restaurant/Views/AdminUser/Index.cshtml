@@ -8,6 +8,7 @@ ViewData["Title"] = "Dashboard";
 var modelData = await Model; // Await the task
 var users = modelData.Item3; // Get the List <GetUserVM>
 }
+<a asp-controller="AdminUser" asp-action="Create" class="btn btn-sm btn-primary me-1">Create</a>
 <table class="table table-striped">
    <thead>
       <tr>
@@ -20,6 +21,7 @@ var users = modelData.Item3; // Get the List <GetUserVM>
          <th scope="col">City</th>
          <th scope="col">Street</th>
          <th scope="col">Role</th>
+         <th scope="col">Operations</th>
       </tr>
    </thead>
    <tbody>
@@ -30,7 +32,7 @@ var users = modelData.Item3; // Get the List <GetUserVM>
       {
       <tr>
          <td>@counter</td>
-         <td><img src="~/Files/@i.imagepath" alt="No image available" width = "90" style = "border-radius: 20px;" /></td>
+             <td><img src="~/Files/@i.imagepath" alt="No image available"  class="img-fluid rounded-circle" style="width: 80px; height: 80px; object-fit: cover;" /></td>
          <td>@i.first_name</td>
          <td>@i.last_name</td>
          <td>@i.age</td>
@@ -38,6 +40,16 @@ var users = modelData.Item3; // Get the List <GetUserVM>
          <td>@i.city</td>
          <td>@i.street</td>
          <td>@i.role</td>
+             <td>
+        <a asp-controller="AdminUser" asp-action="Update" asp-route-id="@i.Id" class="btn btn-sm btn-primary me-1">Edit</a>
+        <a asp-controller="AdminUser" asp-action="Delete" asp-route-id="@i.Id" class="btn btn-sm btn-danger">Delete</a>
+                     <form asp-action="MakeAdmin" asp-route-id="@i.Id" method="post" style="display:inline;">
+        <button type="submit" class="btn btn-sm btn-warning" @(i.role == "Admin" ? "disabled" : "")>
+            Make Admin
+        </button>
+    </form>
+
+    </td>
       </tr>
       counter++;
       }

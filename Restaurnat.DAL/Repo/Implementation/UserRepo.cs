@@ -27,11 +27,11 @@ namespace Restaurnat.DAL.Repo.Implementation
             catch (Exception ex) { return (false, ex.Message); }
         }
 
-        public bool Delete(int id)
+        public bool Delete(string id)
         {
             try
             {
-                var result = DB.Users.Where(i => i.Id == id.ToString()).FirstOrDefault();
+                var result = DB.Users.Where(i => i.Id == id).FirstOrDefault();
                 if (result != null)
                 {
                     DB.Users.Remove(result);
@@ -53,11 +53,11 @@ namespace Restaurnat.DAL.Repo.Implementation
             catch (Exception) { throw; }
         }
 
-        public User GetById(int id)
+        public User GetById(string id)
         {
             try
             {
-                var result = DB.Users.Where(i => i.Id == id.ToString()).FirstOrDefault();
+                var result = DB.Users.Where(i => i.Id == id).FirstOrDefault();
                 return result;
             }
             catch (Exception) { throw; }

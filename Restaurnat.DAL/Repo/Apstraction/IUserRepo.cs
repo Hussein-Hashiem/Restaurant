@@ -5,9 +5,9 @@ namespace Restaurnat.DAL.Repo.Apstraction
     public interface IUserRepo
     {
         List<User> GetAll();
-        User GetById(int id);
+        User GetById(string id);
         (bool, string) Create(User emp);
         bool Update(User emp);
-        bool Delete(int id);
+        bool Delete(string id);
     }
 }

@@ -16,23 +16,9 @@ namespace Restaurant.PL.Controllers
 			var users = userService.GetAll();
 			return View(users);
 		}
+	
 		[HttpGet]
-		public IActionResult Create()
-		{
-			return View();
-		}
-		[HttpPost]
-		public IActionResult Create(CreateUserVM newuser)
-		{
-			if (!ModelState.IsValid) return View(newuser);
-			var result = userService.Create(newuser);
-			if (result.Item1) // Success
-				return RedirectToAction("Index");
-			ViewBag.Error = result.Item2;
-			return View(newuser);
-		}
-		[HttpGet]
-		public IActionResult Update(int id)
+		public IActionResult Update(string id)
 		{
 			var user = userService.GetByID(id);
 			if (!user.Item1) return NotFound();
@@ -66,7 +52,7 @@ namespace Restaurant.PL.Controllers
 			return View(updatedUser);
 		}
 		[HttpGet]
-		public IActionResult Delete(int id)
+		public IActionResult Delete(string id)
 		{
 			var user = userService.GetByID(id);
 			if (!user.Item1) return NotFound();
@@ -74,7 +60,7 @@ namespace Restaurant.PL.Controllers
 			return View(user);
 		}
 		[HttpPost, ActionName("Delete")]
-		public IActionResult DeleteConfirmed(int id)
+		public IActionResult DeleteConfirmed(string id)
 		{
 			var result = userService.Delete(id);
 

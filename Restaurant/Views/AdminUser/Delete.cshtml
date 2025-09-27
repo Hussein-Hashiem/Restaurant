@@ -1,0 +1,40 @@
+﻿@using Restaurnat.BLL.ModelVM.User
+@model GetUserVM
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Delete User";
+}
+
+<h2>Delete User</h2>
+
+<div class="alert alert-danger">
+    <p>Are you sure you want to delete this user?</p>
+</div>
+
+<div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src="~/Files/@Model.imagepath" alt="Profile Picture" class="img-fluid rounded-circle" style="width: 200px; height: 200px; object-fit: cover;"/>
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">@Model.first_name @Model.last_name</h5>
+                <p class="card-text">
+                    <strong>Age:</strong> @Model.age <br />
+                    <strong>Country:</strong> @Model.country <br />
+                    <strong>City:</strong> @Model.city <br />
+                    <strong>Street:</strong> @Model.street <br />
+                    <strong>Role:</strong> @Model.role
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form asp-controller="AdminUser" asp-action="Delete" method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+        <a asp-controller="AdminUser" asp-action="Index" class="btn btn-secondary">Cancel</a>
+
+</form>

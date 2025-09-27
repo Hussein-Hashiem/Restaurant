@@ -2,6 +2,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Restaurnat.BLL.Helper;
+using Restaurnat.BLL.ModelVM.Account;
 using Restaurnat.BLL.ModelVM.User;
 using Restaurnat.BLL.Services.Apstraction;
 using Restaurnat.DAL.Entities;
@@ -22,20 +23,26 @@ namespace Restaurnat.BLL.Services.Implementation
             this.userManager = userManager;
         }
 
-        public (bool, string) Create(CreateUserVM newuser)
+        public async Task<IdentityResult> RegisterUserAsync(RegisterVM newUser)
         {
-            try
+            var user = new User(newUser.first_name, newUser.last_name, newUser.age, newUser.country, newUser.city, newUser.street)
             {
-                var imagepath = Upload.UploadFile("Files", newuser.image);
-                User user = new User(newuser.first_name, newuser.last_name, newuser.age, newuser.country, newuser.city, newuser.street);
-                var result = userRepo.Create(user);
-                if (result.Item1) return (true, "User Created Successfully");
-                else return (false, result.Item2);
+                UserName = newUser.UserName,
+                Email = newUser.email
+            };
+
+            var result = await userManager.CreateAsync(user, newUser.password);
+
+            if (result.Succeeded)
+            {
+                // Add default role
+                await userManager.AddToRoleAsync(user, "User");
             }
-            catch (Exception ex) { return (false, ex.Message); }
+
+            return result;
         }
 
-        public (bool, string) Delete(int id)
+        public (bool, string) Delete(string id)
         {
             try
             {
@@ -69,7 +76,7 @@ namespace Restaurnat.BLL.Services.Implementation
 			}
 		}
 
-		public (bool, string, GetUserVM) GetByID(int id)
+		public (bool, string, GetUserVM) GetByID(string id)
         {
             try
             {
@@ -85,7 +92,7 @@ namespace Restaurnat.BLL.Services.Implementation
         {
             try
             {
-                var user = userRepo.GetById(int.Parse(id));
+                var user = userRepo.GetById(id);
                 var imagepath = Upload.UploadFile("Files", curr.image);
                 var result = user.Update(curr.first_name, curr.last_name, curr.age, curr.country, curr.city, curr.street, imagepath);
                 if (result)

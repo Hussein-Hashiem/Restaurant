@@ -1,7 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Restaurnat.BLL.ModelVM.Account;
 using Restaurnat.BLL.ModelVM.User;
 using Restaurnat.BLL.Services.Apstraction;
+using Restaurnat.BLL.Services.Implementation;
+using Restaurnat.DAL.Entities;
 
 namespace Restaurant.PL.Controllers.AdminPanel
 {
@@ -10,9 +14,11 @@ namespace Restaurant.PL.Controllers.AdminPanel
     {
 
         private readonly IUserService userService;
-        public AdminUserController(IUserService userService)
+        private readonly UserManager<User> userManager;
+        public AdminUserController(IUserService userService, UserManager<User> userManager)
         {
             this.userService = userService;
+            this.userManager = userManager;
         }
         public IActionResult Index()
         {
@@ -25,17 +31,20 @@ namespace Restaurant.PL.Controllers.AdminPanel
             return View();
         }
         [HttpPost]
-        public IActionResult Create(CreateUserVM newuser)
+        public async Task<IActionResult> Create(RegisterVM newuser)
         {
             if (!ModelState.IsValid) return View(newuser);
-            var result = userService.Create(newuser);
-            if (result.Item1) // Success
+
+            var result = await userService.RegisterUserAsync(newuser);
+
+            if (result.Succeeded)
                 return RedirectToAction("Index");
-            ViewBag.Error = result.Item2;
+
+            ViewBag.Error = string.Join(", ", result.Errors.Select(e => e.Description));
             return View(newuser);
         }
         [HttpGet]
-        public IActionResult Update(int id)
+        public IActionResult Update(string id)
         {
             var user = userService.GetByID(id);
             if (!user.Item1) return NotFound();
@@ -69,15 +78,15 @@ namespace Restaurant.PL.Controllers.AdminPanel
             return View(updatedUser);
         }
         [HttpGet]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(string id)
         {
             var user = userService.GetByID(id);
             if (!user.Item1) return NotFound();
 
-            return View(user);
+            return View(user.Item3);
         }
         [HttpPost, ActionName("Delete")]
-        public IActionResult DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(string id)
         {
             var result = userService.Delete(id);
 
@@ -87,6 +96,27 @@ namespace Restaurant.PL.Controllers.AdminPanel
             ViewBag.Error = result.Item2;
             var user = userService.GetByID(id);
             return View("Delete", user);
+        }
+        [HttpPost]
+        public async Task<IActionResult> MakeAdmin(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
+            if (user == null)
+                return NotFound();
+
+            var roles = await userManager.GetRolesAsync(user);
+            if (!roles.Contains("Admin"))
+            {
+                var result = await userManager.AddToRoleAsync(user, "Admin");
+                if (result.Succeeded)
+                    return RedirectToAction("Index");
+
+                ViewBag.Error = string.Join(", ", result.Errors.Select(e => e.Description));
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.Error = "User is already Admin";
+            return RedirectToAction("Index");
         }
     }
 }
