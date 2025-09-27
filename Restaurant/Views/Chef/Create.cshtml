@@ -1,83 +1,76 @@
 ﻿@using Restaurnat.BLL.ModelVM.Chef
 @model CreateChefVM
 
-@{
-    ViewData["Title"] = "Create Chef";
-    // Layout = "~/Views/Shared/_Layout.cshtml";
-}
+<section id="createChef" class="CreateChef section">
+<div class="container" data-aos="fade-up" @* data-aos-delay="100" *@>
 
-<div class="card shadow-sm border-0 rounded-3" style="max-width: 40rem; margin: auto;">
-    <div class="card-header bg-primary text-white fw-bold">
-        Create Chef
-    </div>
-
-    <form asp-controller="Chef" asp-action="SaveChef" enctype="multipart/form-data">
-        <div class="mb-3">
-            <label asp-for="name" class="form-label"></label>
-            <input asp-for="name" type="text" class="form-control" />
-            <span asp-validation-for="name" class="text-danger"></span>
+    <div class="row gy-5 mb-5">
+      <div class="col-lg-6" data-aos="fade-right" data-aos-delay="200">
+        <div class="reservation-info">
+          <div class="text-content">
+            <h3>Create Chef - Admin</h3>
+            <p>Add new Chef to your Staff.</p>
+          </div>
         </div>
+      </div>
+     </div>
 
-        <div class="mb-3">
-            <label asp-for="age" class="form-label"></label>
-            <input asp-for="age" type="number" class="form-control" />
-            <span asp-validation-for="age" class="text-danger"></span>
-        </div>
+     <div class="row">
+      <div class="col-12" data-aos="fade-up" data-aos-delay="400">
+        <div>
+          <form asp-controller="Chef" asp-action="SaveChef" enctype="multipart/form-data">
+              <div class="row gy-4">
+                  <div class="col-lg-6 form-group">
+                      <label asp-for="name" class="form-label"></label>
+                      <input asp-for="name" type="text" class="form-control" placeholder="Chef Name" />
+                      <span asp-validation-for="name" class="text-danger"></span>
+                  </div>
+                  
+                  <div class="col-lg-6 form-group">
+                    <label asp-for="age" class="form-label"></label>
+                    <input asp-for="age" type="number" class="form-control" placeholder="Chef Age" />
+                    <span asp-validation-for="age" class="text-danger"></span>
+                  </div>
+                  
+                  <div class="col-lg-6 form-group">
+                    <label asp-for="categoryId" class="form-label">Chef Role</label>
+                    <select asp-for="categoryId" class="form-select">
+                        <option value="-1">Training / General</option>
+                        <option value="1">Master</option>
+                        <option value="2">Supervisor</option>
+                        <option value="3">Leader</option>
+                    </select>
+                    <span asp-validation-for="categoryId" class="text-danger"></span>
+                </div>
+                <div class="col-lg-6 form-group">
+                    <label asp-for="experience_years" class="form-label"></label>
+                    <input asp-for="experience_years" type="number" class="form-control" />
+                    <span asp-validation-for="experience_years" class="text-danger"></span>
+                </div>
 
-        <div class="mb-3">
-            <label asp-for="about" class="form-label"></label>
-            <textarea asp-for="about" class="form-control" rows="3"></textarea>
-            <span asp-validation-for="about" class="text-danger"></span>
-        </div>
+                <div class="col-lg-6 form-group">
+                    <label asp-for="about" class="form-label"></label>
+                    <textarea asp-for="about" class="form-control" rows="3" placeholder="Chef About"></textarea>
+                    <span asp-validation-for="about" class="text-danger"></span>
+                  </div>
+                  <div class="col-lg-6 form-group">
+                    <label for="img" class="form-label">Chef Image</label>
+                    <input type="file" name="img" class="form-control" id="img" />
+                    <span asp-validation-for="imagepath" class="text-danger"></span>
 
-        <div class="mb-3">
-            <label asp-for="categoryId" class="form-label">Category</label>
-            <select asp-for="categoryId" class="form-select">
-                <option value="-1">Training / General</option>
-                <option value="1">Desserts</option>
-                <option value="2">Grill</option>
-                <option value="3">Seafood</option>
-                <!-- add more categories as needed -->
-            </select>
-            <span asp-validation-for="categoryId" class="text-danger"></span>
-        </div>
+                    <input asp-for="work_now" class="form-check-input" type="checkbox" />
+                    <label asp-for="work_now" class="form-check-label"></label>
+                </div>
+        
+                <input asp-for="CreatedOn" type="hidden" value="@DateTime.Now" />
+                <input asp-for="CreatedBy" type="hidden" value="AdminUser" />
 
-        <div class="mb-3">
-            <label asp-for="experience_years" class="form-label"></label>
-            <input asp-for="experience_years" type="number" class="form-control" />
-            <span asp-validation-for="experience_years" class="text-danger"></span>
-        </div>
+                <button type="submit" class="btn btn-primary">Add Chef</button>
 
-        <div class="mb-3 form-check">
-            <input asp-for="work_now" class="form-check-input" type="checkbox" />
-            <label asp-for="work_now" class="form-check-label"></label>
-        </div>
+            </form>
 
-        <div class="mb-3">
-            <label for="img" class="form-label">Chef Image</label>
-            <input type="file" name="img" class="form-control" id="img" />
-            <span asp-validation-for="imagepath" class="text-danger"></span>
-        </div>
-
-        @* <div class="mb-3">
-            <label asp-for="restaurant_id" class="form-label">Restaurant</label>
-            <select asp-for="restaurant_id" class="form-select">
-                <option value="">-- Select Restaurant --</option>
-                <option value="1">Restaurant A</option>
-                <option value="2">Restaurant B</option>
-                <!-- Fill from DB in real case -->
-            </select>
-            <span asp-validation-for="restaurant_id" class="text-danger"></span>
-        </div> *@
-
-        <!-- Hidden fields for audit -->
-        <input asp-for="CreatedOn" type="hidden" value="@DateTime.Now" />
-        <input asp-for="CreatedBy" type="hidden" value="AdminUser" />
-
-        <button type="submit" class="btn btn-primary">Create Chef</button>
-    </form>
-
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+             <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 </div>
+</section>

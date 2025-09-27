@@ -30,9 +30,21 @@ namespace Restaurnat.BLL.Services.Implementation
                 chef.categoryId = 0;
                 chef.category = "General Chef";
             }
-            else
+            else if (chef.categoryId == 1)
             {
-                var categ = "GetMenuById(chef.categoryId)";
+                var categ = "Master";
+                chef.category = categ;
+            }
+            else if (chef.categoryId == 2)
+            {
+
+                var categ = "Supervisor";
+                chef.category = categ;
+            }
+            else if (chef.categoryId == 3)
+            {
+
+                var categ = "Leader";
                 chef.category = categ;
             }
             chef.work_now = true;
@@ -85,17 +97,34 @@ namespace Restaurnat.BLL.Services.Implementation
         public (bool, string?) Update(EditChefVM chef, IFormFile image)
         {
             if (chef == null) { return (false, "You passed null argument"); }
+            
             if (chef.categoryId == -1)
             {
                 chef.categoryId = 0;
                 chef.category = "General Chef";
             }
-            else
+            else if (chef.categoryId == 1)
             {
-                var categ = "Cook";//"GetMenuById(chef.categoryId)";
+                var categ = "Master";
                 chef.category = categ;
             }
-            chef.imagepath = Upload.UploadFile("Files", image);
+            else if (chef.categoryId == 2)
+            {
+
+                var categ = "Supervisor";
+                chef.category = categ;
+            }
+            else if (chef.categoryId == 3)
+            {
+
+                var categ = "Leader";
+                chef.category = categ;
+            }
+            
+            if (image != null)
+            {
+                chef.imagepath = Upload.UploadFile("Files", image);
+            }
             var chef_mapped = chef_mapper.Map<Chef>(chef);
             var result = chefRepo.Update(chef_mapped);
             if (result.Item1) return (true, null);
