@@ -62,7 +62,7 @@ namespace Restaurnat.BLL.Services.Implementation
                 var menu = menuRepo.GetById(id);
                 if (menu == null)
                     return (false, "Menu not found");
-                menu.Update(dto.name, dto.Description, dto.num_of_items, dto.restaurant_id);
+                menu.Update(dto.name, dto.Description, dto.num_of_items);
                 var result = menuRepo.Update(menu);
                 if (!result.Item1)
                     return (false, "Failed to update menu");

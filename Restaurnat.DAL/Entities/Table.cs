@@ -10,8 +10,8 @@ namespace Restaurnat.DAL.Entities
         public int capacity { get; private set; }
         public bool is_available { get; private set; }
         public List<ReservedTable> ReservedTables { get; private set; }
-        public DateTime CreatedOn { get; private set; }
-        public string CreatedBy { get; private set; }
+        public DateTime? CreatedOn { get; private set; }
+        public string? CreatedBy { get; private set; }
         public DateTime? ModifiedOn { get; private set; }
         public string? ModifiedBy { get; private set; }
         public DateTime? DeletedOn { get; set; }

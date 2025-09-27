@@ -11,12 +11,9 @@ namespace Restaurnat.DAL.Entities
         public string name { get; private set; }
         public string Description { get; private set; }
         public int num_of_items { get; private set; }
-        [ForeignKey("Restaurant")]
-        public int restaurant_id { get; private set; }
-        public Restaurant Restaurant { get; private set; }
         public List<Item> Items { get; private set; }
-        public DateTime CreatedOn { get; private set; }
-        public string CreatedBy { get; private set; }
+        public DateTime? CreatedOn { get; private set; }
+        public string? CreatedBy { get; private set; }
         public DateTime? ModifiedOn { get; private set; }
         public string? ModifiedBy { get; private set; }
         public DateTime? DeletedOn { get; private set; }
@@ -36,15 +33,13 @@ namespace Restaurnat.DAL.Entities
             this.name = name;
             this.Description = description;
             this.num_of_items = numOfItems;
-            this.restaurant_id = restaurantId;
             this.CreatedOn = DateTime.Now;
          }
-        public void Update(string name, string description, int numOfItems, int restaurantId)
+        public void Update(string name, string description, int numOfItems)
         {
             this.name = name;
             this.Description = description;
             this.num_of_items = numOfItems;
-            this.restaurant_id = restaurantId;
             this.ModifiedOn = DateTime.Now;
         }
        

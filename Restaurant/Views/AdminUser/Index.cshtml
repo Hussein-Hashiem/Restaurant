@@ -8,7 +8,7 @@ ViewData["Title"] = "Dashboard";
 var modelData = await Model; // Await the task
 var users = modelData.Item3; // Get the List <GetUserVM>
 }
-<a asp-controller="AdminUser" asp-action="Create" class="btn btn-sm btn-primary me-1">Create</a>
+<a asp-controller="AdminUser" asp-action="Create"  class="btn btn-sm btn-success mb-3">+ Create new user</a>
 <table class="table table-striped">
    <thead>
       <tr>

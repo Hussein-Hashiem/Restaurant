@@ -27,8 +27,8 @@ namespace Restaurnat.DAL.Entities
         public List<ReservedItem> ReservedItems { get; private set; }
         public Payment Payment { get; private set; }
 
-        public DateTime CreatedOn { get; private set; }
-        public string CreatedBy { get; private set; }
+        public DateTime? CreatedOn { get; private set; }
+        public string? CreatedBy { get; private set; }
         public DateTime? ModifiedOn { get; private set; }
         public string? ModifiedBy { get; private set; }
         public DateTime? DeletedOn { get; private set; }

@@ -12,8 +12,8 @@ using Restaurnat.DAL.Database;
 namespace Restaurnat.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250923164407_sss")]
-    partial class sss
+    [Migration("20250927015733_inittt")]
+    partial class inittt
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -167,10 +167,9 @@ namespace Restaurnat.DAL.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("chef_id"));
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DeletedBy")
@@ -207,7 +206,6 @@ namespace Restaurnat.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("imagepath")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("name")
@@ -217,15 +215,10 @@ namespace Restaurnat.DAL.Migrations
                     b.Property<int>("restaurant_id")
                         .HasColumnType("int");
 
-                    b.Property<int?>("restaurant_id1")
-                        .HasColumnType("int");
-
                     b.Property<bool>("work_now")
                         .HasColumnType("bit");
 
                     b.HasKey("chef_id");
-
-                    b.HasIndex("restaurant_id1");
 
                     b.ToTable("Chefs");
                 });
@@ -239,10 +232,9 @@ namespace Restaurnat.DAL.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("event_id"));
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DeletedBy")
@@ -291,10 +283,9 @@ namespace Restaurnat.DAL.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("feedback_id"));
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DeletedBy")
@@ -338,10 +329,9 @@ namespace Restaurnat.DAL.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("item_id"));
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DeletedBy")
@@ -396,10 +386,9 @@ namespace Restaurnat.DAL.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("menu_id"));
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DeletedBy")
@@ -428,12 +417,7 @@ namespace Restaurnat.DAL.Migrations
                     b.Property<int>("num_of_items")
                         .HasColumnType("int");
 
-                    b.Property<int>("restaurant_id")
-                        .HasColumnType("int");
-
                     b.HasKey("menu_id");
-
-                    b.HasIndex("restaurant_id");
 
                     b.ToTable("Menus");
                 });
@@ -447,10 +431,9 @@ namespace Restaurnat.DAL.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("payment_id"));
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DeletedBy")
@@ -501,10 +484,9 @@ namespace Restaurnat.DAL.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("reservation_id"));
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DeletedBy")
@@ -565,10 +547,9 @@ namespace Restaurnat.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DeletedBy")
@@ -602,10 +583,9 @@ namespace Restaurnat.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DeletedBy")
@@ -630,61 +610,6 @@ namespace Restaurnat.DAL.Migrations
                     b.ToTable("ReservedTables");
                 });
 
-            modelBuilder.Entity("Restaurnat.DAL.Entities.Restaurant", b =>
-                {
-                    b.Property<int>("restaurant_id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("restaurant_id"));
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DeletedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("about")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("num_of_guests")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("num_of_vip_customers")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("recommended")
-                        .HasColumnType("bit");
-
-                    b.HasKey("restaurant_id");
-
-                    b.ToTable("Restaurants");
-                });
-
             modelBuilder.Entity("Restaurnat.DAL.Entities.Table", b =>
                 {
                     b.Property<int>("table_id")
@@ -694,10 +619,9 @@ namespace Restaurnat.DAL.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("table_id"));
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DeletedBy")
@@ -739,10 +663,9 @@ namespace Restaurnat.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DeletedBy")
@@ -758,7 +681,7 @@ namespace Restaurnat.DAL.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsDeleted")
+                    b.Property<bool?>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<bool>("LockoutEnabled")
@@ -890,13 +813,6 @@ namespace Restaurnat.DAL.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Restaurnat.DAL.Entities.Chef", b =>
-                {
-                    b.HasOne("Restaurnat.DAL.Entities.Restaurant", null)
-                        .WithMany("Chefs")
-                        .HasForeignKey("restaurant_id1");
-                });
-
             modelBuilder.Entity("Restaurnat.DAL.Entities.Feedback", b =>
                 {
                     b.HasOne("Restaurnat.DAL.Entities.User", "User")
@@ -917,17 +833,6 @@ namespace Restaurnat.DAL.Migrations
                         .IsRequired();
 
                     b.Navigation("Menu");
-                });
-
-            modelBuilder.Entity("Restaurnat.DAL.Entities.Menu", b =>
-                {
-                    b.HasOne("Restaurnat.DAL.Entities.Restaurant", "Restaurant")
-                        .WithMany("Menus")
-                        .HasForeignKey("restaurant_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Restaurant");
                 });
 
             modelBuilder.Entity("Restaurnat.DAL.Entities.Payment", b =>
@@ -1014,13 +919,6 @@ namespace Restaurnat.DAL.Migrations
                     b.Navigation("ReservedItems");
 
                     b.Navigation("ReservedTables");
-                });
-
-            modelBuilder.Entity("Restaurnat.DAL.Entities.Restaurant", b =>
-                {
-                    b.Navigation("Chefs");
-
-                    b.Navigation("Menus");
                 });
 
             modelBuilder.Entity("Restaurnat.DAL.Entities.Table", b =>

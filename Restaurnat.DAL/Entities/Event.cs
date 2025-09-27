@@ -16,8 +16,8 @@ namespace Restaurnat.DAL.Entities
         //[ForeignKey("Restaurant")]
         public int restaurant_id { get; private set; }
         //public Restaurant Restaurant { get; private set; }
-        public DateTime CreatedOn { get; private set; }
-        public string CreatedBy { get; private set; }
+        public DateTime? CreatedOn { get; private set; }
+        public string? CreatedBy { get; private set; }
         public DateTime? ModifiedOn { get; private set; }
         public string? ModifiedBy { get; private set; }
         public DateTime? DeletedOn { get; private set; }

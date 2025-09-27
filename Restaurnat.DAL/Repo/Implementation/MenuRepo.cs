@@ -50,7 +50,7 @@ namespace Restaurnat.DAL.Repo.Implementation
                 var oldMenu = DB.Menus.FirstOrDefault(m => m.menu_id == menu.menu_id);
                 if (oldMenu == null)
                     return (false, " Menu not found");
-                oldMenu.Update(menu.name, menu.Description, menu.num_of_items, menu.restaurant_id);
+                oldMenu.Update(menu.name, menu.Description, menu.num_of_items);
                 DB.SaveChanges();
                 return (true, " Updated successfully");
 

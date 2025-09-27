@@ -19,7 +19,7 @@ namespace Restaurnat.DAL.Entities
         public string? ModifiedBy { get; private set; }
         public DateTime? DeletedOn { get; private set; }
         public string? DeletedBy { get; private set; }
-        public bool? IsDeleted { get; private set; } = false;
+        public bool IsDeleted { get; private set; } = false;
         public bool Update(int rating, string comment)
         {
             if (rating == 0) return false;

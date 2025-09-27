@@ -3,6 +3,7 @@ using Restaurnat.BLL.Services.Apstraction;
 using Restaurnat.BLL.ModelVM.Item;
 using AutoMapper;
 using Restaurnat.DAL.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace Restaurant.PL.Controllers
@@ -16,19 +17,20 @@ namespace Restaurant.PL.Controllers
             _itemService = itemService;
             _mapper = mapper;
         }
+        [Authorize]
         public IActionResult Index()
         {
             try
             {
                 var items = _itemService.GetAll();
-                var vmList = _mapper.Map<List<GetItemVM>>(items);
-                return View(vmList);
+                return View(items);
             }
             catch (Exception ex)
             {
-                return View("Error", ex); // صفحة Error
+                return View("Error", ex);
             }
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult Details(int id)
         {
             try
@@ -45,11 +47,13 @@ namespace Restaurant.PL.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(CreateItemVM item)
@@ -73,6 +77,7 @@ namespace Restaurant.PL.Controllers
                 return View("Error", ex);
             }
         }
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Update(int id)
         {
@@ -89,6 +94,7 @@ namespace Restaurant.PL.Controllers
                 return View("Error", ex);
             }
         }
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Update(UpdateItemVM item)
@@ -112,6 +118,7 @@ namespace Restaurant.PL.Controllers
                 return View("Error", ex);
             }
         }
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Delete(int id)
         {
@@ -128,6 +135,7 @@ namespace Restaurant.PL.Controllers
                 return View("Error", ex);
             }
         }
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)

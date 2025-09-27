@@ -17,8 +17,8 @@ namespace Restaurnat.DAL.Entities
         public string status { get; private set; }
         public PaymentMethod PaymentMethod { get; private set; }
 
-        public DateTime CreatedOn { get; private set; }
-        public string CreatedBy { get; private set; }
+        public DateTime? CreatedOn { get; private set; }
+        public string? CreatedBy { get; private set; }
         public DateTime? ModifiedOn { get; private set; }
         public string? ModifiedBy { get; private set; }
         public DateTime? DeletedOn { get; private set; }

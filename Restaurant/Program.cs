@@ -24,7 +24,6 @@ builder.Services.AddAutoMapper(x => x.AddProfile(new DomainProfile()));
 // Repositories Registration
 builder.Services.AddScoped<IUserRepo, UserRepo>();
 builder.Services.AddScoped<ITableRepo, TableRepo>();
-builder.Services.AddScoped<IRestaurantRepo, RestaurantRepo>();
 builder.Services.AddScoped<IReservedTableRepo, ReservedTableRepo>();
 builder.Services.AddScoped<IReservedItemRepo, ReservedItemRepo>();
 builder.Services.AddScoped<IReservationRepo, ReservationRepo>();
@@ -38,7 +37,6 @@ builder.Services.AddScoped<IChefRepo, ChefRepo>();
 // Services Registration
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITableService, TableService>();
-builder.Services.AddScoped<IRestaurantService, RestaurantService>();
 builder.Services.AddScoped<IReservedTableService, ReservedTableService>();
 builder.Services.AddScoped<IReservedItemService, ReservedItemService>();
 builder.Services.AddScoped<IReservationService, ReservationService>();
