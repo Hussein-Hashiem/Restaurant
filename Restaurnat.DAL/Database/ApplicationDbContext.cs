@@ -15,7 +15,6 @@ namespace Restaurnat.DAL.Database
         public DbSet<Table> Tables { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<Menu> Menus { get; set; }
-        public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<ReservedTable> ReservedTables { get; set; }
         public DbSet<ReservedItem> ReservedItems { get; set; }
         public DbSet<Payment> Payments { get; set; }

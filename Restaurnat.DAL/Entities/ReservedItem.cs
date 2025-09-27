@@ -11,8 +11,8 @@ namespace Restaurnat.DAL.Entities
         [ForeignKey("Reservation")]
         public int ReservationId { get; private set; }
         public Reservation Reservation { get; private set; }
-        public DateTime CreatedOn { get; private set; }
-        public string CreatedBy { get; private set; }
+        public DateTime? CreatedOn { get; private set; }
+        public string? CreatedBy { get; private set; }
         public DateTime? ModifiedOn { get; private set; }
         public string? ModifiedBy { get; private set; }
         public DateTime? DeletedOn { get; private set; }

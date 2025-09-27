@@ -24,11 +24,7 @@ namespace Restaurnat.BLL.Mapper
 		   .ReverseMap();
 			CreateMap<Feedback, CreateFeedbackVM>().ReverseMap();
 
-			CreateMap<Restaurant, CreateRestaurantVM>().ReverseMap();
-			CreateMap<Restaurant, GetRestaurantVM>().ReverseMap();
-			CreateMap<Restaurant, GetAllRestaurantVM>().ReverseMap();
-			CreateMap<Restaurant, UpdateRestaurantVM>().ReverseMap();
-
+		
 
 			CreateMap<Payment, CreatePaymentVM>().ReverseMap();
 			CreateMap<Payment, GetAllPaymentVM>().ReverseMap();
