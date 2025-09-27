@@ -38,7 +38,6 @@ namespace Restaurnat.DAL.Entities
                 category = chef.category;
                 experience_years = chef.experience_years;
                 imagepath = chef.imagepath;
-                restaurant_id = chef.restaurant_id;
                 ModifiedOn = DateTime.Now;
                 ModifiedBy = "Admin";
                 return true;

@@ -5,6 +5,7 @@ namespace Restaurnat.BLL.ModelVM.Reservation
 {
     public class GetReservationVM
     {
+        public int reservation_id { get; set; }
         public DateTime reservation_date { get; set; }
         public int duration { get; set; }
         public int number_of_people { get; set; }
@@ -13,5 +14,6 @@ namespace Restaurnat.BLL.ModelVM.Reservation
         public int total_money { get; set; }
         public int? feedback_id { get; set; }
         public string user_id { get; set; }
+        public Restaurnat.DAL.Entities.User User { get; set; }
     }
 }

@@ -1,16 +1,13 @@
-﻿
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 
-namespace Restaurnat.BLL.ModelVM.Item
+public class UpdateItemVM
 {
-    public class UpdateItemVM
-    {
-        public int id { get; set; }
-        public string name { get; set; }
-        public decimal price { get; set; }
-        public string description { get; set; }
-        public IFormFile image { get; set; }
-        public int menu_id { get; set; }
-        public bool recommended { get; set; }
-    }
+    public int item_id { get; set; }
+    public string name { get; set; }
+    public decimal price { get; set; }
+    public string description { get; set; }
+    public IFormFile? image { get; set; } 
+    public string? ExistingImagePath { get; set; }
+    public int menu_id { get; set; }
+    public bool recommended { get; set; }
 }

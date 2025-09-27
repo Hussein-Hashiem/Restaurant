@@ -16,6 +16,16 @@ namespace Restaurnat.BLL.Services.Implementation
             this.reservationRepo = reservationRepo;
             this.mapper = mapper;
         }
+        public List<GetReservationVM> GetByUserId(string userId)
+        {
+            var allReservations = GetAll().Item1;
+
+            var userReservations = allReservations
+                .Where(r => r.user_id == userId)
+                .ToList();
+
+            return userReservations;
+        }
 
         public (bool, string) Add(CreateReservationVM dto)
         {

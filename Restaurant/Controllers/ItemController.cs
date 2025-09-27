@@ -4,6 +4,7 @@ using Restaurnat.BLL.ModelVM.Item;
 using AutoMapper;
 using Restaurnat.DAL.Entities;
 using Microsoft.AspNetCore.Authorization;
+using Restaurant.Models;
 
 
 namespace Restaurant.PL.Controllers
@@ -81,43 +82,41 @@ namespace Restaurant.PL.Controllers
         [HttpGet]
         public IActionResult Update(int id)
         {
-            try
+            var item = _itemService.GetById(id);
+            if (item == null) return NotFound();
+
+            var updateVM = new UpdateItemVM
             {
-                var item = _itemService.GetById(id);
-                if (item == null)
-                    return NotFound();
-                var vm = _mapper.Map<UpdateItemVM>(item);
-                return View(vm);
-            }
-            catch (Exception ex)
-            {
-                return View("Error", ex);
-            }
+                item_id = id,
+                name = item.name,
+                price = item.price,
+                description = item.description,
+                menu_id = item.menu_id,
+                recommended = item.recommended,
+                ExistingImagePath = item.imagepath 
+            };
+
+            return View(updateVM);
         }
-        [Authorize(Roles = "Admin")]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Update(UpdateItemVM item)
+        public IActionResult Update(UpdateItemVM updatedItem)
         {
-            try
-            {
-                if (!ModelState.IsValid)
-                    return View(item);
-                var result = _itemService.Update(item.id,item);
-                if (!result)
-                {
-                    ModelState.AddModelError("", "Update failed");
-                    return View(item);
-                }
+            if (!ModelState.IsValid)
+                return View(updatedItem);
 
+            var result = _itemService.Update(updatedItem.item_id, updatedItem);
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch (Exception ex)
+            if (!result)
             {
-                return View("Error", ex);
+                ModelState.AddModelError("", "Update failed");
+                return View(updatedItem);
             }
+
+            return RedirectToAction(nameof(Index));
         }
+
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Delete(int id)
@@ -145,14 +144,21 @@ namespace Restaurant.PL.Controllers
                 var result = _itemService.Delete(id);
                 if (!result)
                 {
-                    return View("Error", "Delete failed");
+                    ModelState.AddModelError("", "Delete failed");
+                    var item = _itemService.GetById(id);
+                    var vm = _mapper.Map<GetItemVM>(item);
+                    return View("Delete", vm);
                 }
+
+
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
-                return View("Error", ex);
+                var errorModel = new ErrorViewModel { RequestId = ex.Message };
+                return View("Error", errorModel);
             }
         }
+
     }
 }

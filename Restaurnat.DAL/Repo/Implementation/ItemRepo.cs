@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
 using Restaurnat.DAL.Database;
 using Restaurnat.DAL.Entities;
 using Restaurnat.DAL.Repo.Apstraction;
@@ -48,7 +49,7 @@ namespace Restaurnat.DAL.Repo.Implementation
         {
             try
             {
-                var result = DB.Items.ToList();
+                var result = DB.Items.Include(i => i.Menu).ToList();
                 return result;
             }
             catch (Exception) { throw; }

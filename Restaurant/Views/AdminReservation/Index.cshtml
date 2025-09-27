@@ -1,0 +1,59 @@
+﻿@using Restaurnat.BLL.ModelVM.Reservation
+@model List<GetReservationVM>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Reservations";
+}
+
+<h2 class="mb-3">Reservations</h2>
+
+<a asp-controller="AdminReservation" asp-action="Create" class="btn btn-sm btn-success mb-3">+ Create New Reservation</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">User</th>
+            <th scope="col">Reservation Date</th>
+            <th scope="col">Duration</th>
+            <th scope="col">Number of People</th>
+            <th scope="col">Done</th>
+            <th scope="col">Fees</th>
+            <th scope="col">Total Money</th>
+            <th scope="col">Operations</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int counter = 1;
+        }
+        @foreach (var res in Model)
+        {
+                <tr>
+                    <td>@counter</td>
+                    <td>@res.User?.first_name @res.User?.last_name</td>
+                    <td>@res.reservation_date.ToString("yyyy-MM-dd HH:mm")</td>
+                    <td>@res.duration</td>
+                    <td>@res.number_of_people</td>
+                    <td>
+                    @if (res.done)
+                    {
+                                <span class="badge bg-success">Yes</span>
+                    }
+                    else
+                    {
+                                <span class="badge bg-secondary">No</span>
+                    }
+                    </td>
+                    <td>@res.fees.ToString("C")</td>
+                    <td>@res.total_money.ToString("C")</td>
+                    <td>
+                            <a asp-controller="AdminReservation" asp-action="Update" asp-route-id="@res.reservation_id" class="btn btn-sm btn-primary me-1">Edit</a>
+                            <a asp-controller="AdminReservation" asp-action="Delete" asp-route-id="@res.reservation_id" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+            counter++;
+        }
+    </tbody>
+</table>

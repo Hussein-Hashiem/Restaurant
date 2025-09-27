@@ -20,6 +20,7 @@
             <th scope="col">Name</th>
             <th scope="col">Price</th>
             <th scope="col">Description</th>
+            <th scope="col">Menu</th>
             <th scope="col">Recommended</th>
             <th scope="col">Operations</th>
         </tr>
@@ -33,13 +34,12 @@
                 <tr>
                     <td>@counter</td>
                     <td>
-                        <img src="~/Files/@item.imagepath" alt="No image available"
-                             class="img-fluid rounded"
-                             style="width: 80px; height: 80px; object-fit: cover;" />
+                            <img src="~/Files/@item.imagepath" alt ="No image"  class="img-fluid rounded-circle" style="width: 80px; height: 80px; object-fit: cover;" />
                     </td>
                     <td>@item.name</td>
                     <td>@item.price.ToString("C")</td>
                     <td>@item.description</td>
+                    <td>@item.Menu.name</td>
                     <td>
                     @if (item.recommended)
                     {
@@ -51,13 +51,9 @@
                     }
                     </td>
                     <td>
-                        <a asp-controller="Item" asp-action="Details" asp-route-id="@counter" class="btn btn-sm btn-info me-1">Details</a>
+                 <a asp-controller="Item" asp-action="Update" asp-route-id="@item.item_id" class="btn btn-sm btn-primary me-1">Edit</a>
+        <a asp-controller="Item" asp-action="Delete" asp-route-id="@item.item_id" class="btn btn-sm btn-danger">Delete</a>
 
-                    @if (User.IsInRole("Admin"))
-                    {
-                                <a asp-controller="Item" asp-action="Update" asp-route-id="@counter" class="btn btn-sm btn-primary me-1">Edit</a>
-                                <a asp-controller="Item" asp-action="Delete" asp-route-id="@counter" class="btn btn-sm btn-danger">Delete</a>
-                    }
                     </td>
                 </tr>
             counter++;

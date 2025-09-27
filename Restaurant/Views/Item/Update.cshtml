@@ -1,0 +1,64 @@
+﻿@using Restaurnat.BLL.ModelVM.Item
+@model UpdateItemVM
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Edit Item";
+}
+
+<h2 class="mb-3">Edit Item</h2>
+
+<form asp-action="Update" method="post" enctype="multipart/form-data" class="row g-3">
+    <input type="hidden" asp-for="item_id" />
+
+    <div class="col-md-6">
+        <label asp-for="name" class="form-label"></label>
+        <input asp-for="name" class="form-control" />
+        <span asp-validation-for="name" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="price" class="form-label"></label>
+        <input asp-for="price" class="form-control" />
+        <span asp-validation-for="price" class="text-danger"></span>
+    </div>
+
+    <div class="col-12">
+        <label asp-for="description" class="form-label"></label>
+        <textarea asp-for="description" class="form-control"></textarea>
+        <span asp-validation-for="description" class="text-danger"></span>
+    </div>
+
+    <!-- Current Image -->
+    <div class="col-12">
+        <label>Current Image</label><br />
+        <img src="~/Files/@Model.ExistingImagePath" alt="No image" 
+             class="img-fluid rounded" style="width: 120px; height: 120px; object-fit: cover;" />
+    </div>
+
+    <!-- Upload New Image -->
+    <div class="col-12">
+        <label asp-for="image" class="form-label">Upload New Image</label>
+        <input asp-for="image" type="file" class="form-control" />
+        <span asp-validation-for="image" class="text-danger"></span>
+    </div>
+
+    <!-- Menu -->
+    <div class="col-12">
+        <label asp-for="menu_id" class="form-label"></label>
+        <input asp-for="menu_id" class="form-control" />
+        <span asp-validation-for="menu_id" class="text-danger"></span>
+    </div>
+
+    <!-- Recommended -->
+    <div class="col-12 form-check mt-3">
+        <input asp-for="recommended" class="form-check-input" type="checkbox" />
+        <label asp-for="recommended" class="form-check-label"></label>
+    </div>
+
+    <!-- Submit -->
+    <div class="col-12 mt-3">
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>

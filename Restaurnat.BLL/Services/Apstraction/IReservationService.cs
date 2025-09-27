@@ -11,6 +11,8 @@ namespace Restaurnat.BLL.Services.Apstraction
         (GetReservationVM, string) GetById(int id);
         (bool, string) Update(int id,EditReservationVM dto);
         (bool, string) Delete(int id);
+        List<GetReservationVM> GetByUserId(string userId);
+
 
     }
 }

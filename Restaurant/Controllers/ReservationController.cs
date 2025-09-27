@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Restaurnat.BLL.ModelVM.Menu;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Restaurnat.BLL.ModelVM.Reservation;
 using Restaurnat.BLL.Services.Apstraction;
-using Restaurnat.BLL.Services.Implementation;
 
 namespace Restaurant.PL.Controllers
 {
+    [Authorize(Roles = "User")]
     public class ReservationController : Controller
     {
         private readonly IReservationService _reservationService;
@@ -13,154 +13,90 @@ namespace Restaurant.PL.Controllers
         {
             _reservationService = reservationService;
         }
-        public IActionResult Index()
-        {
-            try
-            {
-                var reservations = _reservationService.GetAll();
-                return View(reservations);
 
-            }
-            catch (Exception ex)
-            {
-                return View("Error", ex.Message);
-            }
-
-        }
-        [HttpGet]
         public IActionResult GetById(int id)
         {
-            try
-            {
+            var res = _reservationService.GetById(id);
+            if (res.Item1 == null || res.Item1.user_id != User.Identity.Name)
+                return Forbid();
 
-                var res = _reservationService.GetById(id);
-                if (res.Item1 == null)
-                {
-                    return NotFound("Reservation not found");
-                }
-
-                return View(res.Item1);
-
-            }
-            catch (Exception ex)
-            {
-                return View("Error", ex.Message);
-            }
+            return View(res.Item1);
         }
 
         [HttpGet]
-        public IActionResult Create()
-        {
-            return View();
-        }
+        public IActionResult Create() => View();
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-
         public IActionResult Create(CreateReservationVM createReservation)
         {
-            try
+            if (!ModelState.IsValid) return View(createReservation);
+
+            var result = _reservationService.Add(createReservation);
+            if (!result.Item1)
             {
-                if (!ModelState.IsValid)
-                    return View(createReservation);
-
-                var result = _reservationService.Add(createReservation);
-                if (!result.Item1)
-                {
-                    ViewBag.Error = result.Item2;
-                    return View(createReservation);
-                }
-
-                return RedirectToAction("Index");
-
+                ViewBag.Error = result.Item2;
+                return View(createReservation);
             }
-            catch (Exception ex)
-            {
-                return View("Error", ex.Message);
-            }
+
+            return RedirectToAction("MyReservations");
         }
+
+        public IActionResult MyReservations()
+        {
+            var reservations = _reservationService.GetByUserId(User.Identity.Name);
+
+            return View(reservations);
+        }
+
         [HttpGet]
         public IActionResult Update(int id)
         {
-            try
-            {
-                var result = _reservationService.GetById(id);
-                if (result.Item1 == null)
-                    return View("NotFound");
-                return View(result.Item1);
+            var res = _reservationService.GetById(id);
+            if (res.Item1 == null || res.Item1.user_id != User.Identity.Name)
+                return Forbid();
 
-            }
-            catch (Exception ex)
-            {
-                return View("Error", ex.Message);
-            }
+            return View(res.Item1);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Update(int id, EditReservationVM editReservation)
         {
-            try
+            var res = _reservationService.GetById(id);
+            if (res.Item1 == null || res.Item1.user_id != User.Identity.Name)
+                return Forbid();
+
+            var result = _reservationService.Update(id, editReservation);
+            if (!result.Item1)
             {
-                if (!ModelState.IsValid)
-                    return View(editReservation);
-
-                var result = _reservationService.Update(id, editReservation);
-
-                if (!result.Item1)
-                {
-                    ViewBag.Error = result.Item2;
-                    return View(editReservation);
-                }
-
-                return RedirectToAction("Index");
-
+                ViewBag.Error = result.Item2;
+                return View(editReservation);
             }
-            catch (Exception ex)
-            {
-                return View("Error", ex.Message);
-            }
+
+            return RedirectToAction("MyReservations");
         }
 
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            try
-            {
-                var result = _reservationService.GetById(id);
-                if (result.Item1 == null)
-                    return View("NotFound");
+            var res = _reservationService.GetById(id);
+            if (res.Item1 == null || res.Item1.user_id != User.Identity.Name)
+                return Forbid();
 
-                return View(result.Item1);
-
-            }
-            catch (Exception ex)
-            {
-                return View("Error", ex.Message);
-            }
+            return View(res.Item1);
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            try
-            {
-                var result = _reservationService.Delete(id);
+            var res = _reservationService.GetById(id);
+            if (res.Item1 == null || res.Item1.user_id != User.Identity.Name)
+                return Forbid();
 
-                if (!result.Item1)
-                {
-                    ViewBag.Error = result.Item2;
-                    return RedirectToAction("Delete", new { id });
-                }
-
-                return RedirectToAction("Index");
-
-            }
-            catch (Exception ex)
-            {
-                return View("Error", ex.Message);
-            }
+            _reservationService.Delete(id);
+            return RedirectToAction("MyReservations");
         }
     }
 }
