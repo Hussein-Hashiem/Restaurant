@@ -12,8 +12,8 @@ using Restaurnat.DAL.Database;
 namespace Restaurnat.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250927015733_inittt")]
-    partial class inittt
+    [Migration("20250927130605_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -191,9 +191,8 @@ namespace Restaurnat.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("age")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("age")
+                        .HasColumnType("int");
 
                     b.Property<string>("category")
                         .IsRequired()
@@ -211,9 +210,6 @@ namespace Restaurnat.DAL.Migrations
                     b.Property<string>("name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("restaurant_id")
-                        .HasColumnType("int");
 
                     b.Property<bool>("work_now")
                         .HasColumnType("bit");
