@@ -42,7 +42,7 @@ namespace Restaurnat.DAL.Repo.Implementation
                     {
                         DB.SaveChanges();
                         return (true, null);
-                    }   
+                    }
                 }
                 return (false, "Something went wrong");
             }
@@ -86,7 +86,7 @@ namespace Restaurnat.DAL.Repo.Implementation
                     DB.SaveChanges();
                     return (true, null);
                 }
-                
+
             }
             return (false, "Something went wrong");
         }
@@ -103,7 +103,7 @@ namespace Restaurnat.DAL.Repo.Implementation
 
         public (List<Event>, string?) GetAll()
         {
-            var result = DB.Events.Where(evv => evv.IsDeleted == false).ToList();
+            var result = DB.Events.ToList(); //.Where(evv => evv.IsDeleted == false)
             if (result.Count > 0)
             {
                 return (result, null);

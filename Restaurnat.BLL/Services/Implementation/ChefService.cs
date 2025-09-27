@@ -23,8 +23,8 @@ namespace Restaurnat.BLL.Services.Implementation
 
         public (bool, string?) Create(CreateChefVM chef, IFormFile image)
         {
-            if(chef == null) return (false, "No chef is entered");
-            if(image == null) return (false, "image not uploaded!");
+            if (chef == null) return (false, "No chef is entered");
+            if (image == null) return (false, "image not uploaded!");
             if (chef.categoryId == -1)
             {
                 chef.categoryId = 0;
@@ -33,13 +33,11 @@ namespace Restaurnat.BLL.Services.Implementation
             else
             {
                 var categ = "GetMenuById(chef.categoryId)";
-                chef.category=categ; 
+                chef.category = categ;
             }
             chef.work_now = true;
             chef.imagepath = Upload.UploadFile("Files", image);
-            chef.CreatedOn = DateTime.Now;
-            chef.CreatedBy = "Admin";
-
+            chef.restaurant_id = 0;
             var chef_mapped = chef_mapper.Map<Chef>(chef);
             var result = chefRepo.Create(chef_mapped);
             if (result.Item1) return (true, null);
@@ -64,8 +62,8 @@ namespace Restaurnat.BLL.Services.Implementation
         public (List<GetChefVM>, string?) GetAll()
         {
             var result = chefRepo.GetAll();
-            var chefList_mapped = chef_mapper.Map<List<GetChefVM>>(result);
-            if (chefList_mapped.Count<1)
+            var chefList_mapped = chef_mapper.Map<List<GetChefVM>>(result.Item1);
+            if (chefList_mapped.Count < 1)
             {
                 return (null, "No data found");
             }
@@ -76,8 +74,8 @@ namespace Restaurnat.BLL.Services.Implementation
         {
             if (id == null || id < 0) return (null, "No id is entered");
             var result = chefRepo.GetById(id);
-            var chef_mapped = chef_mapper.Map<GetChefVM>(result);
-            if (chef_mapped==null)
+            var chef_mapped = chef_mapper.Map<GetChefVM>(result.Item1);
+            if (chef_mapped == null)
             {
                 return (null, "No data found");
             }
@@ -94,7 +92,7 @@ namespace Restaurnat.BLL.Services.Implementation
             }
             else
             {
-                var categ = "GetMenuById(chef.categoryId)";
+                var categ = "Cook";//"GetMenuById(chef.categoryId)";
                 chef.category = categ;
             }
             chef.imagepath = Upload.UploadFile("Files", image);

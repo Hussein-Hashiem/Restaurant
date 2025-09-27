@@ -13,7 +13,7 @@ namespace Restaurnat.DAL.Entities
         public string description { get; private set; }
         public DateTime date { get; private set; }
         public int duration { get; private set; }
-        [ForeignKey("Restaurant")]
+        //[ForeignKey("Restaurant")]
         public int restaurant_id { get; private set; }
         //public Restaurant Restaurant { get; private set; }
         public DateTime? CreatedOn { get; private set; }
