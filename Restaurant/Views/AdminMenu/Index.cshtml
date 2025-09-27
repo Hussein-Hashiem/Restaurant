@@ -1,0 +1,42 @@
+﻿@using Restaurnat.BLL.ModelVM.Menu
+@model List<GetMenuVM>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Menus";
+}
+
+<h2 class="mb-3">Menus</h2>
+
+<a asp-controller="AdminMenu" asp-action="Create" class="btn btn-sm btn-success mb-3">+ Create New Menu</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Number of Items</th>
+            <th scope="col">Operations</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int counter = 1;
+        }
+        @foreach (var menu in Model)
+        {
+                <tr>
+                    <td>@counter</td>
+                    <td>@menu.name</td>
+                    <td>@menu.Description</td>
+                    <td>@menu.Items.Count()</td>
+                    <td>
+                        <a asp-controller="AdminMenu" asp-action="Update" asp-route-id="@menu.menu_id" class="btn btn-sm btn-primary me-1">Edit</a>
+                        <a asp-controller="AdminMenu" asp-action="Delete" asp-route-id="@menu.menu_id" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+            counter++;
+        }
+    </tbody>
+</table>

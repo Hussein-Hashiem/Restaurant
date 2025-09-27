@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
 using Restaurnat.DAL.Database;
 using Restaurnat.DAL.Entities;
 using Restaurnat.DAL.Repo.Apstraction;
@@ -27,7 +28,7 @@ namespace Restaurnat.DAL.Repo.Implementation
         {
             try
             {
-                var result = DB.Menus.ToList();
+                var result = DB.Menus.Include(m => m.Items).ToList();
                 return result;
             }
             catch (Exception) { throw; }
@@ -50,7 +51,7 @@ namespace Restaurnat.DAL.Repo.Implementation
                 var oldMenu = DB.Menus.FirstOrDefault(m => m.menu_id == menu.menu_id);
                 if (oldMenu == null)
                     return (false, " Menu not found");
-                oldMenu.Update(menu.name, menu.Description, menu.num_of_items);
+                oldMenu.Update(menu.name, menu.Description);
                 DB.SaveChanges();
                 return (true, " Updated successfully");
 

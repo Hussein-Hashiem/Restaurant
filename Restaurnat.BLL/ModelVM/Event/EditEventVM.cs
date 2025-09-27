@@ -23,7 +23,5 @@ namespace Restaurnat.BLL.ModelVM.Event
         [Range(30, 180, ErrorMessage = "Should be minimum 30 min & max 180 min")]
         public int duration { get; set; }
 
-        [Range(0, 100)]
-        public int restaurant_id { get; set; }
-    }
+       }
 }

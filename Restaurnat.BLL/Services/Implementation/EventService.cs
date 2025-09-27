@@ -24,8 +24,6 @@ namespace Restaurnat.BLL.Services.Implementation
         public (bool, string?) Create(CreateEventVM eventy)
         {
             if (eventy == null) return (false, "No event is entered");
-            eventy.CreatedBy = "Admin";
-            eventy.CreatedOn = DateTime.Now;
             var event_mapped = event_mapper.Map<Event>(eventy);
             var result = eventRepo.Create(event_mapped);
             if (result.Item1) return (true, null);
@@ -42,12 +40,12 @@ namespace Restaurnat.BLL.Services.Implementation
 
         public (List<GetEventVM>, string?) GetAllEvents()
         {
-            var result = eventRepo.GetAll();
-            var eventList_mapped = event_mapper.Map<List<GetEventVM>>(result);
-            if (eventList_mapped.Count < 1)
-            {
+            var result = eventRepo.GetAll(); // List<Event>
+            if (result .Item1== null || result.Item1.Count == 0)
                 return (null, "No data found");
-            }
+
+            // فقط اعمل Map للـ List
+            var eventList_mapped = event_mapper.Map<List<GetEventVM>>(result);
             return (eventList_mapped, null);
         }
 

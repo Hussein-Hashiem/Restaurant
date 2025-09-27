@@ -1,0 +1,62 @@
+﻿@using Restaurnat.BLL.ModelVM.Reservation
+@model CreateReservationVM
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Create Reservation";
+}
+
+<h2>Create New Reservation</h2>
+
+@if (ViewBag.Error != null)
+{
+        <div class="alert alert-danger">@ViewBag.Error</div>
+}
+
+<form asp-action="Create" method="post" class="row g-3">
+
+    <div class="col-md-6">
+        <label asp-for="reservation_date" class="form-label">Reservation Date</label>
+        <input asp-for="reservation_date" class="form-control" type="datetime-local" />
+        <span asp-validation-for="reservation_date" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="duration" class="form-label">Duration (hours)</label>
+        <input asp-for="duration" class="form-control" type="number" min="1" />
+        <span asp-validation-for="duration" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="number_of_people" class="form-label">Number of People</label>
+        <input asp-for="number_of_people" class="form-control" type="number" min="1" />
+        <span asp-validation-for="number_of_people" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6 form-check mt-4">
+        <input asp-for="done" class="form-check-input" type="checkbox" />
+        <label asp-for="done" class="form-check-label">Done</label>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="fees" class="form-label">Fees</label>
+        <input asp-for="fees" class="form-control" type="number" min="0" />
+        <span asp-validation-for="fees" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="total_money" class="form-label">Total Money</label>
+        <input asp-for="total_money" class="form-control" type="number" min="0" />
+        <span asp-validation-for="total_money" class="text-danger"></span>
+    </div>
+
+   <!-- Hidden User ID -->
+    <input asp-for="user_id" type="hidden" value="@User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value" />
+
+
+    <div class="col-12 mt-3">
+        <button type="submit" class="btn btn-success">Create Reservation</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </div>
+
+</form>

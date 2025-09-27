@@ -1,5 +1,6 @@
 ﻿
 using System.Reflection.Metadata.Ecma335;
+using Microsoft.EntityFrameworkCore;
 using Restaurnat.DAL.Database;
 using Restaurnat.DAL.Entities;
 using Restaurnat.DAL.Repo.Apstraction;
@@ -33,7 +34,7 @@ namespace Restaurnat.DAL.Repo.Implementation
         {
             try
             {
-                var result = DB.Reservations.ToList();
+                var result = DB.Reservations.Include(r => r.User).ToList();
                 return result;
             }
             catch (Exception) { throw; }
@@ -43,7 +44,7 @@ namespace Restaurnat.DAL.Repo.Implementation
         {
             try
             {
-                var result = DB.Reservations.FirstOrDefault(m => m.reservation_id == id);
+                var result = DB.Reservations.Include(r => r.User).FirstOrDefault(m => m.reservation_id == id);
                 return result;
             }
             catch (Exception) { throw; }
@@ -55,7 +56,7 @@ namespace Restaurnat.DAL.Repo.Implementation
             {
                 var existingReservation = DB.Reservations.FirstOrDefault(m => m.reservation_id == reservation.reservation_id);
                 if (existingReservation == null) return (false, "Reservation not found");
-                existingReservation.Update(reservation.reservation_date, reservation.duration, reservation.number_of_people, reservation.fees, reservation.total_money);
+                existingReservation.Update(reservation.reservation_date, reservation.duration, reservation.number_of_people, reservation.fees, reservation.total_money, reservation.done);
                 DB.SaveChanges();
                 return (true, "Reservation updated successfully");
             }

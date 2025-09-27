@@ -25,21 +25,18 @@ namespace Restaurnat.DAL.Entities
         }
         public Menu(
             string name,
-            string description,
-            int numOfItems,
-            int restaurantId
+            string description
+
         )
         {
             this.name = name;
             this.Description = description;
-            this.num_of_items = numOfItems;
             this.CreatedOn = DateTime.Now;
          }
-        public void Update(string name, string description, int numOfItems)
+        public void Update(string name, string description)
         {
             this.name = name;
             this.Description = description;
-            this.num_of_items = numOfItems;
             this.ModifiedOn = DateTime.Now;
         }
        

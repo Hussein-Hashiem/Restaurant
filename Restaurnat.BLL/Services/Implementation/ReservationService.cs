@@ -31,7 +31,7 @@ namespace Restaurnat.BLL.Services.Implementation
         {
             try
             {
-                var reservation = new Reservation(dto.reservation_date, dto.duration, dto.number_of_people, dto.fees, dto.total_money, dto.user_id);
+                var reservation = new Reservation(dto.reservation_date, dto.duration, dto.number_of_people, dto.fees, dto.total_money, dto.user_id, dto.done);
                 var result = reservationRepo.Add(reservation);
                 if (result.Item1) return (true, "Reservation added successfully");
                 return (false, "Failed to add reservation");
@@ -81,7 +81,7 @@ namespace Restaurnat.BLL.Services.Implementation
             try {
                 var reservation = reservationRepo.GetById(id);
                 if (reservation == null) return (false, "Not Found");
-                reservation.Update(dto.reservation_date, dto.duration, dto.number_of_people, dto.fees, dto.total_money);
+                reservation.Update(dto.reservation_date, dto.duration, dto.number_of_people, dto.fees, dto.total_money, dto.done);
                 var isUpdated = reservationRepo.Update(reservation);
                 if (!isUpdated.Item1) return (false, "Update Failed");
                 return (true, "Updated Successfully");

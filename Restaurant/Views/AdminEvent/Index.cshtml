@@ -1,0 +1,49 @@
+﻿@model List<Restaurnat.BLL.ModelVM.Event.GetEventVM>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Events";
+}
+
+<h2 class="mb-3">Events</h2>
+
+@if (ViewBag.Message != null)
+{
+        <div class="alert alert-info">@ViewBag.Message</div>
+}
+<a asp-controller="AdminEvent" asp-action="Create"  class="btn btn-sm btn-success mb-3">+ Create new event</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Date</th>
+            <th>Duration</th>
+            <th>Operations</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int counter = 1;
+        }
+        @if (Model != null)
+        {
+            foreach (var ev in Model)
+            {
+                        <tr>
+                            <td>@counter</td>
+                            <td>@ev.name</td>
+                            <td>@ev.description</td>
+                            <td>@ev.date.ToString("g")</td>
+                            <td>@ev.duration</td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@ev.event_id" class="btn btn-sm btn-primary me-1">Edit</a>
+                                <a asp-action="Delete" asp-route-id="@ev.event_id" class="btn btn-sm btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                counter++;
+            }
+        }
+    </tbody>
+</table>

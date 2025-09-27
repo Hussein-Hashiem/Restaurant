@@ -1,0 +1,38 @@
+﻿@using Restaurnat.BLL.ModelVM.Event
+@model CreateEventVM
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Create Event";
+}
+
+<h2 class="mb-3">Create New Event</h2>
+
+<form asp-action="Create" method="post">
+    <div class="mb-3">
+        <label asp-for="name" class="form-label">Event Name</label>
+        <input asp-for="name" class="form-control" />
+        <span asp-validation-for="name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="description" class="form-label">Event Description</label>
+        <textarea asp-for="description" class="form-control"></textarea>
+        <span asp-validation-for="description" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="date" class="form-label">Event Date</label>
+        <input asp-for="date" class="form-control" type="datetime-local" />
+        <span asp-validation-for="date" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="duration" class="form-label">Duration (minutes)</label>
+        <input asp-for="duration" class="form-control" type="number" min="30" max="180" />
+        <span asp-validation-for="duration" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Save Event</button>
+    <a asp-action="GetAll" class="btn btn-secondary">Cancel</a>
+</form>

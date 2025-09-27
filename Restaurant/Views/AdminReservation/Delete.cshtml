@@ -1,0 +1,38 @@
+﻿@using Restaurnat.BLL.ModelVM.Reservation
+@model GetReservationVM
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Delete Reservation";
+}
+
+<h2>Delete Reservation</h2>
+
+<div class="alert alert-danger">
+    <p>Are you sure you want to delete this reservation?</p>
+</div>
+
+<div class="card mb-3" style="max-width: 600px;">
+    <div class="row g-0">
+        <div class="col-md-12">
+            <div class="card-body">
+                <h5 class="card-title">Reservation Details</h5>
+                <p class="card-text">
+                    <strong>User:</strong> @Model.User.first_name @Model.User.last_name <br />
+                    <strong>Date:</strong> @Model.reservation_date.ToString("g") <br />
+                    <strong>Duration:</strong> @Model.duration hours <br />
+                    <strong>Number of People:</strong> @Model.number_of_people <br />
+                    <strong>Fees:</strong> @Model.fees.ToString("C") <br />
+                    <strong>Total Money:</strong> @Model.total_money.ToString("C") <br />
+                    <strong>Done:</strong> @(Model.done ? "Yes" : "No")
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="reservation_id" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

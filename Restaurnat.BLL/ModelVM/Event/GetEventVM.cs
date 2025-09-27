@@ -14,11 +14,5 @@ namespace Restaurnat.BLL.ModelVM.Event
         public string description { get; set; }
         public DateTime date { get; set; }
         public int duration { get; set; }
-        public int restaurant_id { get; set; }
-        //public Restaurant Restaurant { get; private set; }
-        public DateTime CreatedOn { get; set; }
-        public DateTime? ModifiedOn { get; set; }
-        public DateTime? DeletedOn { get; set; }
-        public bool IsDeleted { get; set; }
     }
 }

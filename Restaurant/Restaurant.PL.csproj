@@ -26,6 +26,7 @@
     <ProjectReference Include="..\Restaurnat.BLL\Restaurnat.BLL.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Views\Item\" />
     <Folder Include="wwwroot\Files\" />
   </ItemGroup>
 
