@@ -5,52 +5,58 @@ using Restaurnat.BLL.ModelVM.Chef;
 using Restaurnat.BLL.Services.Implementation;
 using Restaurnat.BLL.ModelVM.User;
 using Restaurnat.DAL.Entities;
+using Restaurnat.BLL.ModelVM.Email;
 namespace Restaurant.PL.Controllers
 {
     public class ChefController : Controller
     {
+        private readonly EmailService _emailService;
         private readonly IChefService cservice;
-        public ChefController(IChefService chservice)
+        public ChefController(IChefService chservice, EmailService _emailService)
         {
             this.cservice = chservice;
-        }
-        public IActionResult Index()
-        {
-            return View();
+            this._emailService = _emailService;
         }
 
         [HttpGet]
-        public ActionResult Create()
+        public ActionResult Create() //done
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult SaveChef(CreateChefVM chef, IFormFile img)
+        public async Task<ActionResult> SaveChef(CreateChefVM chef, IFormFile img) //done
         {
             if (!ModelState.IsValid)
             {
                 var result = cservice.Create(chef, img);
                 if (result.Item1)
                 {
+                    var emailModel = new EmailSendVM
+                    {
+                        ToEmail = "Sief.gamal2006@gmail.com",
+                        Subject = "New Chef Created",
+                        Message = $"Chef {chef.name} has been added successfully!"
+                    };
+                    await _emailService.SendEmailAsync(emailModel.ToEmail, emailModel.Subject, emailModel.Message);
                     return RedirectToAction("GetAll", "Chef");
                 }
-
             }
-            return View(chef);
+            return View("Create", chef);
         }
-        public IActionResult GetAll()
+        public IActionResult GetAll() //done
         {
-            var chefs= cservice.GetAll();
+            var chefs = cservice.GetAll();
 
-            if (chefs.Item2 != null)
+            if (!string.IsNullOrEmpty(chefs.Item2))
             {
-                ViewBag.Message(chefs.Item2);
+                ViewBag.Message = chefs.Item2;
             }
             return View(chefs.Item1);
         }
 
-        public IActionResult Delete(int id)
+
+        public IActionResult Delete(int id) //done
         {
             var result = cservice.Delete(id);
 
@@ -60,27 +66,35 @@ namespace Restaurant.PL.Controllers
             }
             return RedirectToAction("GetAll", "Chef");
         }
+
         public IActionResult GetById(int id)
         {
             var result = cservice.GetById(id);
 
             if (result.Item2 != null)
             {
-                ViewBag.Message(result.Item2);
                 return RedirectToAction("GetAll", "Chef");
             }
             return View(result.Item1);
         }
-        public IActionResult Edit(EditChefVM chef, IFormFile img)
+        [HttpGet]
+        public IActionResult Edit(int id) //done
         {
-            var result = cservice.Update(chef, img);
+            var result = cservice.GetById(id);
 
             if (result.Item2 != null)
             {
-                ViewBag.Message(result.Item2);
                 return RedirectToAction("GetAll", "Chef");
             }
             return View(result.Item1);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int id, EditChefVM chef, IFormFile img) //done
+        {
+            chef.chef_id = id;
+            var result = cservice.Update(chef, img);
+            return RedirectToAction("GetAll", "Chef");
         }
     }
 }

@@ -6,11 +6,11 @@ namespace Restaurnat.DAL.Entities
 {
     public class Chef
     {
-        
+
         [Key]
         public int chef_id { get; private set; }
         public string name { get; private set; }
-        public string age { get; private set; }
+        public int age { get; private set; }
         public string about { get; private set; }
         public int categoryId { get; private set; }
         public string category { get; private set; }
@@ -18,7 +18,7 @@ namespace Restaurnat.DAL.Entities
         public bool work_now { get; private set; }
         //public int work_status { get; private set; } // hired - fired - retired
         public string imagepath { get; private set; }
-        [ForeignKey("Restaurant")]
+        //[ForeignKey("Restaurant")]
         public int restaurant_id { get; private set; }
         //public Restaurant Restaurant { get; private set; }
         public DateTime CreatedOn { get; private set; }
@@ -36,13 +36,13 @@ namespace Restaurnat.DAL.Entities
                 name = chef.name;
                 age = chef.age;
                 about = chef.about;
-                work_now=chef.work_now;
+                work_now = chef.work_now;
                 category = chef.category;
                 experience_years = chef.experience_years;
                 imagepath = chef.imagepath;
                 restaurant_id = chef.restaurant_id;
                 ModifiedOn = DateTime.Now;
-                ModifiedBy = chef.ModifiedBy;
+                ModifiedBy = "Admin";
                 return true;
             }
             return false;
@@ -54,7 +54,7 @@ namespace Restaurnat.DAL.Entities
             {
                 IsDeleted = true;
                 DeletedOn = DateTime.Now;
-                DeletedBy= deletedBy;
+                DeletedBy = deletedBy;
                 return true;
             }
             return false;

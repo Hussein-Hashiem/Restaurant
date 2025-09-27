@@ -9,7 +9,7 @@ namespace Restaurnat.BLL.ModelVM.Event
 {
     public class EditEventVM
     {
-        public int event_id { get;  set; }
+        public int event_id { get; set; }
         [Required(ErrorMessage = "Event Name is required")]
         [MinLength(3)]
         public string name { get; set; }
@@ -22,7 +22,7 @@ namespace Restaurnat.BLL.ModelVM.Event
         [Required(ErrorMessage = "Should add Duartion -in minutes- for Event")]
         [Range(30, 180, ErrorMessage = "Should be minimum 30 min & max 180 min")]
         public int duration { get; set; }
-        [Required(ErrorMessage = "Should belong to the restaurant")]
+
         [Range(0, 100)]
         public int restaurant_id { get; set; }
     }
