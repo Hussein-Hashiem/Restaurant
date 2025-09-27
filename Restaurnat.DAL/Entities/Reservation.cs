@@ -45,7 +45,8 @@ namespace Restaurnat.DAL.Entities
             int numberOfPeople,
             int fees,
             int totalMoney,
-            string userId)
+            string userId,
+            bool done)
         {
             this.reservation_date = reservationDate;
             this.duration = duration;
@@ -53,6 +54,7 @@ namespace Restaurnat.DAL.Entities
             this.fees = fees;
             this.total_money = totalMoney;
             this.user_id = userId;
+            this.done = done;
         }
 
         public void Update(
@@ -60,7 +62,7 @@ namespace Restaurnat.DAL.Entities
             int duration,
             int numberOfPeople,
             int fees,
-            int totalMoney)
+            int totalMoney, bool done)
         {
             this.reservation_date = reservationDate;
             this.duration = duration;
@@ -68,6 +70,7 @@ namespace Restaurnat.DAL.Entities
             this.fees = fees;
             this.total_money = totalMoney;
             this.ModifiedOn = DateTime.Now;
+            this.done = done;
         }
 
 

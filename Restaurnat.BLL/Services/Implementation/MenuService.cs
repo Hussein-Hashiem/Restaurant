@@ -20,7 +20,7 @@ namespace Restaurnat.BLL.Services.Implementation
         {
             try
             {
-                var newmenu = new Menu(menu.name, menu.Description, menu.num_of_items, menu.restaurant_id);
+                var newmenu = new Menu(menu.name, menu.Description);
                 var result = menuRepo.Add(newmenu);
                 if (!result.Item1)
                     return (false, "Failed to add menu");
@@ -62,7 +62,7 @@ namespace Restaurnat.BLL.Services.Implementation
                 var menu = menuRepo.GetById(id);
                 if (menu == null)
                     return (false, "Menu not found");
-                menu.Update(dto.name, dto.Description, dto.num_of_items);
+                menu.Update(dto.name, dto.Description);
                 var result = menuRepo.Update(menu);
                 if (!result.Item1)
                     return (false, "Failed to update menu");

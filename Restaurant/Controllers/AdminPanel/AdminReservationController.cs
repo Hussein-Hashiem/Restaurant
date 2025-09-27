@@ -84,13 +84,26 @@ namespace Restaurant.PL.Controllers
                 var result = _reservationService.GetById(id);
                 if (result.Item1 == null)
                     return View("NotFound");
-                return View(result.Item1);
+
+                var editVM = new EditReservationVM
+                {
+                    reservation_id = result.Item1.reservation_id,
+                    reservation_date = result.Item1.reservation_date,
+                    duration = result.Item1.duration,
+                    number_of_people = result.Item1.number_of_people,
+                    fees = result.Item1.fees,
+                    total_money = result.Item1.total_money,
+                    done = result.Item1.done
+                };
+
+                return View(editVM);
             }
             catch (Exception ex)
             {
                 return View("Error", ex.Message);
             }
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -126,7 +139,7 @@ namespace Restaurant.PL.Controllers
                 if (result.Item1 == null)
                     return View("NotFound");
 
-                return View(result.Item1);
+                return View(result.Item1); // Model: GetReservationVM
             }
             catch (Exception ex)
             {
@@ -155,5 +168,6 @@ namespace Restaurant.PL.Controllers
                 return View("Error", ex.Message);
             }
         }
+
     }
 }
